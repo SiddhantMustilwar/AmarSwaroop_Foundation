@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Tiro+Devanagari+Marathi:ital@0;1&display=swap" rel="stylesheet">
+  <title>Upcoming Events — Amar Swaroop Foundation</title>
+  <style>
+    :root {
+      --saffron:#d4660a; --saffron-light:#f4a14a; --green:#2d6a4f;
+      --green-light:#52b788; --cream:#fdf6ec; --parchment:#f5ede0;
+      --dark:#1c1208; --text:#3d2e1a; --gold:#c9922a; --earth:#b5793a;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 5%;background:rgba(253,246,236,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,102,10,0.12);box-shadow:0 2px 20px rgba(0,0,0,0.06);}
+    .logo{font-family:"Cormorant Garamond",serif;font-size:1.3rem;font-weight:700;color:var(--green);line-height:1.1;text-decoration:none;display:block;}
+    .logo span{color:var(--saffron);}
+    .nav-right{display:flex;align-items:center;gap:1.5rem;}
+    .nav-right a{text-decoration:none;font-size:.85rem;font-weight:500;color:var(--text);transition:color .2s;}
+    .nav-right a:hover{color:var(--saffron);}
+    .nav-back{background:var(--green);color:#fff!important;padding:.45rem 1.3rem;border-radius:50px;}
+    .nav-back:hover{background:var(--green-light)!important;}
+
+    /* HERO */
+    .page-hero{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8rem 5% 4rem;text-align:center;position:relative;overflow:hidden;background:var(--cream);}
+    .hero-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 20% 30%,rgba(212,102,10,0.07) 0%,transparent 50%),radial-gradient(ellipse at 80% 70%,rgba(45,106,79,0.07) 0%,transparent 50%);}
+    .ring{position:absolute;border-radius:50%;border:1px solid rgba(181,121,58,0.07);pointer-events:none;top:50%;left:50%;transform:translate(-50%,-50%);}
+    .ring-1{width:700px;height:700px;} .ring-2{width:500px;height:500px;} .ring-3{width:300px;height:300px;}
+    .hero-eyebrow{font-family:"Tiro Devanagari Marathi",serif;font-size:1rem;color:var(--saffron);margin-bottom:1rem;position:relative;z-index:1;opacity:.85;animation:fadeUp .7s ease both;}
+    .hero-divider{display:flex;align-items:center;gap:1rem;justify-content:center;margin-bottom:1.2rem;position:relative;z-index:1;animation:fadeUp .7s .1s ease both;}
+    .hdl{width:50px;height:1px;background:var(--gold);} .hdd{color:var(--gold);font-size:1rem;}
+    h1.hero-title{font-family:"Cormorant Garamond",serif;font-size:clamp(2.8rem,6vw,5.5rem);font-weight:300;line-height:1.05;color:var(--dark);letter-spacing:-1px;position:relative;z-index:1;animation:fadeUp .7s .2s ease both;}
+    h1.hero-title em{font-style:italic;color:var(--saffron);}
+    .hero-mr{font-family:"Tiro Devanagari Marathi",serif;font-size:clamp(1.2rem,2.5vw,1.8rem);color:var(--green);display:block;margin-top:.4rem;margin-bottom:1.5rem;position:relative;z-index:1;animation:fadeUp .7s .3s ease both;}
+    .hero-tagline{font-family:"Cormorant Garamond",serif;font-size:1.05rem;color:#7a5a38;font-style:italic;position:relative;z-index:1;animation:fadeUp .7s .4s ease both;max-width:520px;}
+
+    /* GREEN STRIP */
+    .green-strip{background:var(--green);padding:.85rem 5%;display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap;}
+    .gpill{display:flex;align-items:center;gap:.4rem;color:rgba(255,255,255,.7);font-size:.82rem;}
+    .gpill strong{color:#fff;} .gpill .mr{font-family:"Tiro Devanagari Marathi",serif;font-size:.88rem;}
+
+    /* ADMIN TOGGLE BUTTON */
+    .admin-toggle-wrap{text-align:center;padding:2rem 5% 0;}
+    .admin-toggle-btn{background:transparent;border:2px solid var(--earth);color:var(--earth);padding:.6rem 1.8rem;border-radius:50px;font-family:"DM Sans",sans-serif;font-size:.85rem;font-weight:500;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;gap:.5rem;}
+    .admin-toggle-btn:hover{background:var(--earth);color:#fff;}
+    .admin-toggle-btn.active{background:var(--earth);color:#fff;}
+
+    /* ADMIN PANEL */
+    .admin-panel{display:none;background:#fff;border:2px solid rgba(212,102,10,0.2);border-radius:20px;padding:2.5rem;max-width:720px;margin:1.5rem auto 0;box-shadow:0 8px 40px rgba(0,0,0,0.08);}
+    .admin-panel.show{display:block;}
+    .admin-panel h3{font-family:"Cormorant Garamond",serif;font-size:1.6rem;color:var(--dark);margin-bottom:.3rem;}
+    .admin-panel .amr{font-family:"Tiro Devanagari Marathi",serif;font-size:.85rem;color:var(--earth);display:block;margin-bottom:1.5rem;}
+    .admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+    .afield{display:flex;flex-direction:column;gap:.35rem;}
+    .afield.full{grid-column:1/-1;}
+    .afield label{font-size:.75rem;font-weight:500;color:#666;letter-spacing:.8px;text-transform:uppercase;}
+    .afield input,.afield textarea,.afield select{padding:.8rem 1rem;border:2px solid rgba(0,0,0,0.08);border-radius:10px;font-family:"DM Sans",sans-serif;font-size:.88rem;color:var(--dark);background:#fafafa;outline:none;transition:border-color .2s;}
+    .afield input:focus,.afield textarea:focus,.afield select:focus{border-color:var(--earth);background:#fff;}
+    .afield textarea{resize:vertical;min-height:80px;}
+    .admin-btns{display:flex;gap:.8rem;margin-top:1.2rem;flex-wrap:wrap;}
+    .btn-add{background:var(--green);color:#fff;border:none;padding:.85rem 2rem;border-radius:50px;font-family:"DM Sans",sans-serif;font-size:.9rem;font-weight:500;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(45,106,79,.3);}
+    .btn-add:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(45,106,79,.4);}
+    .btn-clear{background:transparent;color:#999;border:1px solid #ddd;padding:.85rem 1.5rem;border-radius:50px;font-family:"DM Sans",sans-serif;font-size:.9rem;cursor:pointer;transition:all .2s;}
+    .btn-clear:hover{border-color:#bbb;color:#666;}
+    .admin-note{font-size:.78rem;color:#bbb;margin-top:.8rem;font-style:italic;}
+
+    /* CALENDAR SECTION */
+    .calendar-section{padding:4rem 5%;}
+    .cal-inner{max-width:1100px;margin:0 auto;}
+
+    /* Month navigation */
+    .month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.5rem;background:#fff;border-radius:16px;padding:1.2rem 2rem;box-shadow:0 4px 20px rgba(0,0,0,0.06);}
+    .month-nav-btn{background:transparent;border:2px solid rgba(181,121,58,.2);color:var(--earth);width:40px;height:40px;border-radius:50%;font-size:1.1rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;}
+    .month-nav-btn:hover{background:var(--earth);color:#fff;border-color:var(--earth);}
+    .month-title{text-align:center;}
+    .month-title h2{font-family:"Cormorant Garamond",serif;font-size:1.8rem;font-weight:600;color:var(--dark);}
+    .month-title .month-mr{font-family:"Tiro Devanagari Marathi",serif;font-size:.85rem;color:var(--earth);display:block;margin-top:.1rem;}
+
+    /* Calendar grid */
+    .cal-grid-wrap{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);margin-bottom:3rem;}
+    .cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);background:var(--green);}
+    .cal-weekday{padding:.7rem;text-align:center;font-size:.75rem;font-weight:500;color:rgba(255,255,255,.8);letter-spacing:.5px;text-transform:uppercase;}
+    .cal-days{display:grid;grid-template-columns:repeat(7,1fr);}
+    .cal-day{min-height:80px;padding:.6rem;border-right:1px solid rgba(0,0,0,.04);border-bottom:1px solid rgba(0,0,0,.04);position:relative;cursor:default;transition:background .2s;}
+    .cal-day:hover{background:rgba(181,121,58,.04);}
+    .cal-day.empty{background:#fafafa;}
+    .cal-day.today .day-num{background:var(--saffron);color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;}
+    .cal-day.has-event{background:rgba(45,106,79,.04);}
+    .cal-day.has-event::after{content:"";position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:6px;height:6px;border-radius:50%;background:var(--green);}
+    .day-num{font-size:.88rem;font-weight:500;color:var(--text);width:28px;height:28px;display:flex;align-items:center;justify-content:center;margin-bottom:.2rem;}
+    .day-event-dot{font-size:.65rem;background:var(--green);color:#fff;border-radius:4px;padding:.1rem .35rem;margin-top:.2rem;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;cursor:pointer;}
+    .day-event-dot:hover{background:var(--saffron);}
+
+    /* EVENTS LIST */
+    .events-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;}
+    .events-header h3{font-family:"Cormorant Garamond",serif;font-size:1.8rem;color:var(--dark);}
+    .events-header h3 em{font-style:italic;color:var(--saffron);}
+    .events-header .emr{font-family:"Tiro Devanagari Marathi",serif;font-size:.85rem;color:var(--earth);display:block;margin-top:.1rem;}
+    .filter-btns{display:flex;gap:.5rem;flex-wrap:wrap;}
+    .filter-btn{padding:.4rem 1rem;border-radius:50px;border:1.5px solid rgba(181,121,58,.25);font-size:.78rem;font-weight:500;color:var(--earth);background:transparent;cursor:pointer;transition:all .2s;}
+    .filter-btn.active,.filter-btn:hover{background:var(--earth);color:#fff;border-color:var(--earth);}
+
+    /* EVENT CARDS */
+    .events-list{display:flex;flex-direction:column;gap:1.2rem;}
+    .event-card{background:#fff;border-radius:16px;padding:1.8rem;display:grid;grid-template-columns:90px 1fr auto;gap:1.5rem;align-items:start;box-shadow:0 4px 20px rgba(0,0,0,.06);transition:transform .25s,box-shadow .25s;border-left:4px solid var(--green);}
+    .event-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.1);}
+    .event-card.upcoming{border-left-color:var(--green);}
+    .event-card.past{border-left-color:#ccc;opacity:.7;}
+    .event-date-box{text-align:center;background:var(--green);color:#fff;border-radius:12px;padding:.8rem .5rem;}
+    .event-date-box .eday{font-family:"Cormorant Garamond",serif;font-size:2rem;font-weight:700;line-height:1;}
+    .event-date-box .emon{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;opacity:.8;}
+    .event-date-box .eyr{font-size:.7rem;opacity:.6;margin-top:.1rem;}
+    .event-date-box.past-box{background:#bbb;}
+    .event-body h4{font-family:"Cormorant Garamond",serif;font-size:1.25rem;color:var(--dark);margin-bottom:.3rem;}
+    .event-body .emr-title{font-family:"Tiro Devanagari Marathi",serif;font-size:.8rem;color:var(--earth);display:block;margin-bottom:.5rem;}
+    .event-meta{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:.6rem;}
+    .emeta{display:flex;align-items:center;gap:.3rem;font-size:.8rem;color:#888;}
+    .event-body p{font-size:.87rem;line-height:1.7;color:#7a5a38;}
+    .event-register{font-size:.8rem;margin-top:.7rem;color:var(--green);font-weight:500;display:inline-flex;align-items:center;gap:.3rem;}
+    .event-actions{display:flex;flex-direction:column;gap:.5rem;align-items:flex-end;}
+    .btn-join{background:var(--green);color:#fff;border:none;padding:.55rem 1.3rem;border-radius:50px;font-size:.8rem;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .2s;text-decoration:none;display:inline-block;}
+    .btn-join:hover{background:var(--green-light);}
+    .btn-edit{background:transparent;border:1.5px solid rgba(181,121,58,.3);color:var(--earth);padding:.45rem 1rem;border-radius:50px;font-size:.75rem;cursor:pointer;transition:all .2s;display:none;}
+    .btn-edit:hover{background:var(--earth);color:#fff;}
+    .btn-delete{background:transparent;border:1.5px solid rgba(200,50,50,.2);color:#c44;padding:.45rem 1rem;border-radius:50px;font-size:.75rem;cursor:pointer;transition:all .2s;display:none;}
+    .btn-delete:hover{background:#c44;color:#fff;}
+    .admin-mode .btn-edit,.admin-mode .btn-delete{display:inline-block;}
+
+    /* EMPTY STATE */
+    .empty-state{text-align:center;padding:4rem 2rem;color:#bbb;}
+    .empty-state .ei{font-size:4rem;margin-bottom:1rem;}
+    .empty-state h4{font-family:"Cormorant Garamond",serif;font-size:1.4rem;color:#ccc;margin-bottom:.5rem;}
+    .empty-state .emr2{font-family:"Tiro Devanagari Marathi",serif;font-size:.85rem;color:#ddd;}
+
+    /* QUOTE BAND */
+    .qband{background:var(--saffron);padding:2.5rem 5%;text-align:center;position:relative;overflow:hidden;}
+    .qband::before{content:"✦ ❋ ✦ ❋ ✦ ❋ ✦";position:absolute;top:.6rem;left:0;right:0;text-align:center;font-size:.85rem;color:rgba(255,255,255,.15);letter-spacing:1rem;}
+    .qb-mr{font-family:"Tiro Devanagari Marathi",serif;font-size:clamp(1.1rem,2.5vw,1.7rem);color:#fff;line-height:1.6;margin-bottom:.4rem;}
+    .qb-en{font-family:"Cormorant Garamond",serif;font-size:.95rem;font-style:italic;color:rgba(255,255,255,.65);}
+
+    /* MODAL */
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:1rem;}
+    .modal-overlay.show{display:flex;}
+    .modal{background:#fff;border-radius:20px;padding:2.5rem;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;position:relative;}
+    .modal h3{font-family:"Cormorant Garamond",serif;font-size:1.6rem;color:var(--dark);margin-bottom:1.5rem;}
+    .modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#999;line-height:1;}
+    .modal-body{display:flex;flex-direction:column;gap:1rem;}
+    .modal-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+    .mfield{display:flex;flex-direction:column;gap:.35rem;}
+    .mfield label{font-size:.75rem;font-weight:500;color:#666;letter-spacing:.8px;text-transform:uppercase;}
+    .mfield input,.mfield textarea,.mfield select{padding:.75rem 1rem;border:2px solid rgba(0,0,0,0.08);border-radius:10px;font-family:"DM Sans",sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;}
+    .mfield input:focus,.mfield textarea:focus{border-color:var(--earth);}
+    .mfield textarea{resize:vertical;min-height:80px;}
+
+    /* FOOTER */
+    .pg-footer{background:#111;padding:1.8rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+    .pg-footer .logo{color:var(--green);}
+    .pg-footer p{font-size:.8rem;color:rgba(255,255,255,.3);}
+    .fmr{font-family:"Tiro Devanagari Marathi",serif;font-size:.85rem;color:rgba(255,255,255,.2);}
+
+    /* ANIMATIONS */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+    .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+
+    /* JOIN MODAL */
+    .join-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:300;align-items:center;justify-content:center;padding:1rem;}
+    .join-overlay.show{display:flex;}
+    .join-modal{background:#fff;border-radius:24px;padding:2.5rem;max-width:460px;width:100%;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:popIn .3s ease both;}
+    @keyframes popIn{from{opacity:0;transform:scale(.92) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+    .join-modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#bbb;line-height:1;transition:color .2s;}
+    .join-modal-close:hover{color:var(--dark);}
+    .join-modal-header{margin-bottom:1.5rem;}
+    .join-modal-header .event-badge{background:var(--green);color:#fff;font-size:.72rem;font-weight:500;padding:.3rem .8rem;border-radius:50px;display:inline-block;margin-bottom:.8rem;letter-spacing:.5px;}
+    .join-modal-header h3{font-family:"Cormorant Garamond",serif;font-size:1.7rem;color:var(--dark);line-height:1.15;margin-bottom:.2rem;}
+    .join-modal-header .jmr{font-family:"Tiro Devanagari Marathi",serif;font-size:.88rem;color:var(--earth);display:block;margin-bottom:.4rem;}
+    .join-modal-header .event-meta-small{font-size:.8rem;color:#999;display:flex;gap:1rem;flex-wrap:wrap;}
+    .jfield{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1rem;}
+    .jfield label{font-size:.75rem;font-weight:500;color:#666;letter-spacing:.8px;text-transform:uppercase;}
+    .jfield input{padding:.85rem 1rem;border:2px solid rgba(0,0,0,.08);border-radius:12px;font-family:"DM Sans",sans-serif;font-size:.9rem;color:var(--dark);background:#fafafa;outline:none;transition:border-color .2s,background .2s;}
+    .jfield input:focus{border-color:var(--green);background:#fff;}
+    .jfield input.error{border-color:#e44;}
+    .btn-submit-join{width:100%;background:var(--green);color:#fff;border:none;padding:1rem;border-radius:50px;font-family:"DM Sans",sans-serif;font-size:.95rem;font-weight:500;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 18px rgba(45,106,79,.3);margin-top:.5rem;}
+    .btn-submit-join:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(45,106,79,.4);}
+    .btn-submit-join:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+    .join-success{display:none;text-align:center;padding:1.5rem 0;}
+    .join-success.show{display:block;}
+    .join-success .si{font-size:3.5rem;margin-bottom:.8rem;}
+    .join-success h4{font-family:"Cormorant Garamond",serif;font-size:1.5rem;color:var(--green);margin-bottom:.3rem;}
+    .join-success .smr{font-family:"Tiro Devanagari Marathi",serif;font-size:.9rem;color:var(--earth);display:block;margin-bottom:.5rem;}
+    .join-success p{font-size:.85rem;color:#888;line-height:1.7;}
+    .setup-banner{background:rgba(233,196,106,0.15);border:1px solid #e9c46a;border-radius:12px;padding:.9rem 1.1rem;font-size:.78rem;color:#7a5c00;margin-bottom:1.2rem;line-height:1.6;}
+    .setup-banner strong{color:#5a4000;}
+    /* MOBILE */
+    @media(max-width:768px){
+      .event-card{grid-template-columns:70px 1fr;}.event-actions{grid-column:1/-1;flex-direction:row;}
+      .admin-grid{grid-template-columns:1fr;}.cal-day{min-height:55px;}
+      .nav-right a:not(.nav-back){display:none;}
+      .month-nav{padding:.8rem 1rem;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Amar<span>Swaroop</span><br>Foundation</a>
+  <div class="nav-right">
+    <a href="index.html">Home</a>
+    <a href="our-story.html" target="_blank">Our Story</a>
+    <a href="index.html#forms-section">Join Us</a>
+    <a href="index.html" class="nav-back">← Main Website</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="hero-glow"></div>
+  <div class="ring ring-1"></div><div class="ring ring-2"></div><div class="ring ring-3"></div>
+  <p class="hero-eyebrow">आगामी कार्यक्रम &nbsp;·&nbsp; नागपूर, महाराष्ट्र</p>
+  <div class="hero-divider"><div class="hdl"></div><div class="hdd">❋</div><div class="hdl"></div></div>
+  <h1 class="hero-title">Upcoming <em>Drives</em></h1>
+  <span class="hero-mr">आगामी स्वच्छता मोहिमा</span>
+  <p class="hero-tagline">"Every drive is a step closer to a cleaner, kinder Nagpur. Come join us."</p>
+</section>
+
+<!-- GREEN STRIP -->
+<div class="green-strip">
+  <div class="gpill">📍 <strong>Nagpur</strong> <span class="mr">नागपूर</span></div>
+  <div class="gpill">♻️ <span class="mr">स्वच्छता मोहीम</span></div>
+  <div class="gpill">🙌 <span class="mr">स्वयंसेवक हवे आहेत</span></div>
+  <div class="gpill">💚 <span class="mr">सेवा हाच धर्म</span></div>
+</div>
+
+<!-- ADMIN TOGGLE -->
+<div class="admin-toggle-wrap">
+  <button class="admin-toggle-btn" id="adminToggleBtn" onclick="promptAdmin(this)">🔐 Admin Login &nbsp;·&nbsp; <span style="font-family:'Tiro Devanagari Marathi',serif;">प्रशासक लॉगिन</span></button>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+  <h3>➕ Add New Event</h3>
+  <span class="amr">नवीन कार्यक्रम जोडा</span>
+  <div class="admin-grid">
+    <div class="afield full"><label>Event Title (English)</label><input type="text" id="a-title" placeholder="e.g. Dharampeth Cleanup Drive"></div>
+    <div class="afield full"><label>Event Title (Marathi) — मराठी शीर्षक</label><input type="text" id="a-title-mr" placeholder="e.g. धरमपेठ स्वच्छता मोहीम" style="font-family:'Tiro Devanagari Marathi',serif;"></div>
+    <div class="afield"><label>Date</label><input type="date" id="a-date"></div>
+    <div class="afield"><label>Time</label><input type="time" id="a-time"></div>
+    <div class="afield full"><label>Location in Nagpur</label><input type="text" id="a-location" placeholder="e.g. Dharampeth Ward, near Central School"></div>
+    <div class="afield full"><label>Description</label><textarea id="a-desc" placeholder="What will happen at this drive? Who should come? What to bring?"></textarea></div>
+    <div class="afield full"><label>How to Register / Join</label><input type="text" id="a-register" placeholder="e.g. WhatsApp 98765 43210 or fill the volunteer form"></div>
+  </div>
+  <div class="admin-btns">
+    <button class="btn-add" onclick="addEvent()">✅ Add Event &nbsp;·&nbsp; <span style="font-family:'Tiro Devanagari Marathi',serif;font-size:.85rem;">कार्यक्रम जोडा</span></button>
+    <button class="btn-clear" onclick="clearForm()">Clear Form</button>
+  </div>
+  <p class="admin-note">✅ Events are saved to Google Sheets and cached locally — they will appear on every visit.</p>
+</div>
+
+<!-- QUOTE BAND -->
+<div class="qband" style="margin-top:2rem;">
+  <p class="qb-mr">"स्वच्छता म्हणजे केवळ सफाई नाही — ती एक जबाबदारी आहे."</p>
+  <p class="qb-en">"Cleanliness is not just tidiness — it is a responsibility."</p>
+</div>
+
+<!-- CALENDAR + EVENTS -->
+<div class="calendar-section">
+  <div class="cal-inner">
+
+    <!-- Month Calendar -->
+    <div class="month-nav reveal">
+      <button class="month-nav-btn" onclick="changeMonth(-1)">‹</button>
+      <div class="month-title">
+        <h2 id="monthLabel">March 2026</h2>
+        <span class="month-mr" id="monthMrLabel">मार्च २०२६</span>
+      </div>
+      <button class="month-nav-btn" onclick="changeMonth(1)">›</button>
+    </div>
+
+    <div class="cal-grid-wrap reveal">
+      <div class="cal-weekdays">
+        <div class="cal-weekday">Sun <span style="font-family:'Tiro Devanagari Marathi',serif;display:block;font-size:.65rem;">रवि</span></div>
+        <div class="cal-weekday">Mon <span style="font-family:'Tiro Devanagari Marathi',serif;display:block;font-size:.65rem;">सोम</span></div>
+        <div class="cal-weekday">Tue <span style="font-family:'Tiro Devanagari Marathi',serif;display:block;font-size:.65rem;">मंगळ</span></div>
+        <div class="cal-weekday">Wed <span style="font-family:'Tiro Devanagari Marathi',serif;display:block;font-size:.65rem;">बुध</span></div>
+        <div class="cal-weekday">Thu <span style="font-family:'Tiro Devanagari Marathi',serif;display:block;font-size:.65rem;">गुरु</span></div>
+        <div class="cal-weekday">Fri <span style="font-family:'Tiro Devanagari Marathi',serif;display:block;font-size:.65rem;">शुक्र</span></div>
+        <div class="cal-weekday">Sat <span style="font-family:'Tiro Devanagari Marathi',serif;display:block;font-size:.65rem;">शनि</span></div>
+      </div>
+      <div class="cal-days" id="calDays"></div>
+    </div>
+
+    <!-- Events List -->
+    <div class="events-header reveal">
+      <div>
+        <h3>Scheduled <em>Events</em></h3>
+        <span class="emr">नियोजित कार्यक्रम</span>
+      </div>
+      <div class="filter-btns">
+        <button class="filter-btn active" onclick="filterEvents('all', this)">All · सर्व</button>
+        <button class="filter-btn" onclick="filterEvents('upcoming', this)">Upcoming · आगामी</button>
+        <button class="filter-btn" onclick="filterEvents('past', this)">Past · गेलेले</button>
+      </div>
+    </div>
+
+    <div class="events-list reveal" id="eventsList"></div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="pg-footer">
+  <a href="index.html" class="logo">Amar<span>Swaroop</span> Foundation</a>
+  <p class="fmr">नागपूर, महाराष्ट्र · आगामी कार्यक्रम</p>
+  <p>© 2025 · Made with 💚 in Nagpur</p>
+</footer>
+
+
+<!-- JOIN MODAL -->
+<div class="join-overlay" id="joinOverlay">
+  <div class="join-modal">
+    <button class="join-modal-close" onclick="closeJoinModal()">✕</button>
+
+    <!-- Form view -->
+    <div id="joinFormView">
+      <div class="join-modal-header">
+        <span class="event-badge">🙌 Register to Join · सहभागी व्हा</span>
+        <h3 id="jm-title">Cleanup Drive</h3>
+        <span class="jmr" id="jm-title-mr"></span>
+        <div class="event-meta-small">
+          <span id="jm-date">📅</span>
+          <span id="jm-location">📍</span>
+        </div>
+      </div>
+
+
+
+      <div class="jfield">
+        <label>Full Name · पूर्ण नाव *</label>
+        <input type="text" id="j-name" placeholder="Rahul Sharma">
+      </div>
+      <div class="jfield">
+        <label>Phone Number · फोन नंबर *</label>
+        <input type="tel" id="j-phone" placeholder="+91 98765 43210">
+      </div>
+      <div class="jfield">
+        <label>Email Address · ईमेल *</label>
+        <input type="email" id="j-email" placeholder="rahul@example.com">
+      </div>
+      <div class="jfield">
+        <label>Message (optional) · संदेश</label>
+        <input type="text" id="j-message" placeholder="Any questions or notes...">
+      </div>
+
+      <button class="btn-submit-join" id="joinSubmitBtn" onclick="submitJoin()">
+        ✅ Confirm Registration · नोंदणी करा
+      </button>
+    </div>
+
+    <!-- Success view -->
+    <div class="join-success" id="joinSuccessView">
+      <div class="si">🎉</div>
+      <h4>You're Registered!</h4>
+      <span class="smr">नोंदणी यशस्वी झाली!</span>
+      <p>Thank you for signing up. We'll send you a confirmation on your email. See you at the drive! 💚</p>
+      <br>
+      <p style="font-family:'Tiro Devanagari Marathi',serif;font-size:.88rem;color:var(--earth);">धन्यवाद! आम्ही तुमची वाट पाहत आहोत.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PASSWORD MODAL -->
+<div class="modal-overlay" id="pwModal">
+  <div class="modal" style="max-width:380px;">
+    <button class="modal-close" onclick="closePwModal()">✕</button>
+    <h3>🔐 Admin Login</h3>
+    <p style="font-family:'Tiro Devanagari Marathi',serif;font-size:.85rem;color:var(--earth);margin-bottom:1.5rem;">प्रशासक लॉगिन</p>
+    <div class="mfield">
+      <label>Password · पासवर्ड</label>
+      <input type="password" id="pw-input" placeholder="Enter admin password" onkeydown="if(event.key==='Enter') checkPassword()">
+    </div>
+    <p id="pw-error" style="display:none;color:#c44;font-size:.8rem;margin-top:.5rem;">❌ Wrong password. Try again. · चुकीचा पासवर्ड.</p>
+    <button class="btn-add" onclick="checkPassword()" style="margin-top:1.2rem;border:none;width:100%;">Login · लॉगिन करा</button>
+    <p style="font-size:.72rem;color:#bbb;margin-top:1rem;text-align:center;">Default password: <strong>asf@2017</strong><br>Change it in the HTML file.</p>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3>Edit Event · <span style="font-family:'Tiro Devanagari Marathi',serif;font-size:1rem;">कार्यक्रम संपादित करा</span></h3>
+    <div class="modal-body">
+      <input type="hidden" id="edit-id">
+      <div class="mfield"><label>Event Title</label><input type="text" id="edit-title"></div>
+      <div class="mfield"><label>Marathi Title</label><input type="text" id="edit-title-mr" style="font-family:'Tiro Devanagari Marathi',serif;"></div>
+      <div class="modal-row">
+        <div class="mfield"><label>Date</label><input type="date" id="edit-date"></div>
+        <div class="mfield"><label>Time</label><input type="time" id="edit-time"></div>
+      </div>
+      <div class="mfield"><label>Location</label><input type="text" id="edit-location"></div>
+      <div class="mfield"><label>Description</label><textarea id="edit-desc"></textarea></div>
+      <div class="mfield"><label>How to Register</label><input type="text" id="edit-register"></div>
+      <button class="btn-add" onclick="saveEdit()" style="margin-top:.5rem;border:none;">Save Changes ✓</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Marathi month names ──
+const mrMonths = ["जानेवारी","फेब्रुवारी","मार्च","एप्रिल","मे","जून","जुलै","ऑगस्ट","सप्टेंबर","ऑक्टोबर","नोव्हेंबर","डिसेंबर"];
+const enMonths = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const mrNums   = ["०","१","२","३","४","५","६","७","८","९"];
+
+function toMrNum(n) {
+  return String(n).split("").map(d => mrNums[+d] || d).join("");
+}
+
+// ── State ──
+let currentMonth = new Date().getMonth();
+let currentYear  = new Date().getFullYear();
+let adminMode    = false;
+let editingId    = null;
+let currentFilter = "all";
+
+// ── Events state ──
+let events = [];
+
+// ── localStorage helpers ──
+function saveEventsLocally(evList) {
+  try { localStorage.setItem("asf_events", JSON.stringify(evList)); } catch(e) {}
+}
+function loadEventsLocally() {
+  try {
+    const raw = localStorage.getItem("asf_events");
+    return raw ? JSON.parse(raw) : null;
+  } catch(e) { return null; }
+}
+
+function normalizeDate(d) {
+  if (!d) return "";
+  if (/^\d{1,2}[\/\-]\d{1,2}[\/\-]\d{4}$/.test(d)) {
+    const p = d.split(/[\/\-]/);
+    return `${p[2]}-${p[1].padStart(2,"0")}-${p[0].padStart(2,"0")}`;
+  }
+  if (/^\d{4}-\d{2}-\d{2}$/.test(d)) return d;
+  const parsed = new Date(d);
+  if (!isNaN(parsed)) return parsed.toISOString().split("T")[0];
+  return d;
+}
+
+// ── Load events from Google Sheet ──
+async function loadEventsFromSheet() {
+  // Step 1: Show cached events immediately so page is never blank on revisit
+  const cached = loadEventsLocally();
+  if (cached && cached.length > 0) {
+    events = cached;
+    renderAll();
+  } else {
+    showLoadingState(true);
+  }
+
+  // Step 2: Fetch fresh events from sheet in background
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 8000);
+    const res = await fetch(MASTER_SHEET_URL + "?type=get_events", { signal: controller.signal });
+    clearTimeout(timer);
+    const data = await res.json();
+    if (data.status === "success" && data.events && data.events.length > 0) {
+      const fresh = data.events
+        .filter(e => e.title && e.date)
+        .map(e => ({ ...e, id: Number(e.id) || Date.now(), date: normalizeDate(e.date) }));
+      fresh.sort((a,b) => a.date.localeCompare(b.date));
+      events = fresh;
+      saveEventsLocally(events);
+      renderAll();
+      return;
+    }
+  } catch(err) {
+    console.warn("Sheet fetch failed, using cache:", err);
+  }
+
+  // Step 3: If sheet failed and no cache, show empty state
+  if (!cached || cached.length === 0) {
+    events = [];
+    showLoadingState(false);
+    renderAll();
+  }
+}
+
+function showLoadingState(loading) {
+  const list = document.getElementById("eventsList");
+  if (loading) {
+    list.innerHTML = `<div style="text-align:center;padding:3rem;color:#bbb;">
+      <div style="font-size:2rem;margin-bottom:1rem;">⏳</div>
+      <p>Loading events... <span style="font-family:'Tiro Devanagari Marathi',serif;">कार्यक्रम लोड होत आहेत...</span></p>
+    </div>`;
+  }
+}
+
+// ── Save event to Google Sheet ──
+async function saveEventToSheet(ev) {
+  if (MASTER_SHEET_URL === _DEMO_SENTINEL) return; // demo mode only
+  try {
+    await fetch(MASTER_SHEET_URL, {
+      method: "POST", mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ type: "save_event", event: ev })
+    });
+  } catch(err) { console.error("Sheet save error:", err); }
+}
+
+// ── Delete event from Google Sheet ──
+async function deleteEventFromSheet(id) {
+  if (MASTER_SHEET_URL === _DEMO_SENTINEL) return; // demo mode only
+  try {
+    await fetch(MASTER_SHEET_URL, {
+      method: "POST", mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ type: "delete_event", eventId: id })
+    });
+  } catch(err) { console.error("Sheet delete error:", err); }
+}
+
+// ── Admin toggle with password ──
+const ADMIN_PASSWORD = "asf@2017"; // Change this to your own password
+
+function promptAdmin(btn) {
+  if (adminMode) {
+    // Already logged in — log out
+    adminMode = false;
+    btn.classList.remove("active");
+    document.getElementById("adminPanel").classList.remove("show");
+    document.body.classList.remove("admin-mode");
+    btn.innerHTML = "🔐 Admin Login &nbsp;·&nbsp; <span style=\"font-family:'Tiro Devanagari Marathi',serif;\">प्रशासक लॉगिन</span>";
+    return;
+  }
+  // Show password modal
+  document.getElementById("pwModal").classList.add("show");
+}
+
+function checkPassword() {
+  const entered = document.getElementById("pw-input").value;
+  if (entered === ADMIN_PASSWORD) {
+    adminMode = true;
+    const btn = document.getElementById("adminToggleBtn");
+    btn.classList.add("active");
+    document.getElementById("adminPanel").classList.add("show");
+    document.body.classList.add("admin-mode");
+    btn.innerHTML = "🔓 Admin Mode ON &nbsp;·&nbsp; <span style=\"font-family:'Tiro Devanagari Marathi',serif;\">लॉगआउट करा</span>";
+    closePwModal();
+  } else {
+    document.getElementById("pw-error").style.display = "block";
+    document.getElementById("pw-input").value = "";
+    document.getElementById("pw-input").focus();
+  }
+}
+
+function closePwModal() {
+  document.getElementById("pwModal").classList.remove("show");
+  document.getElementById("pw-input").value = "";
+  document.getElementById("pw-error").style.display = "none";
+}
+
+// ── Add event ──
+function addEvent() {
+  const title    = document.getElementById("a-title").value.trim();
+  const titleMr  = document.getElementById("a-title-mr").value.trim();
+  const date     = document.getElementById("a-date").value;
+  const time     = document.getElementById("a-time").value;
+  const location = document.getElementById("a-location").value.trim();
+  const desc     = document.getElementById("a-desc").value.trim();
+  const register = document.getElementById("a-register").value.trim();
+
+  if (!title || !date || !location) {
+    alert("Please fill in Title, Date and Location.");
+    return;
+  }
+
+  const newEvent = { id: Date.now(), title, titleMr, date, time, location, desc, register };
+  events.push(newEvent);
+  events.sort((a, b) => a.date.localeCompare(b.date));
+  saveEventsLocally(events); // persist immediately so revisit shows this event
+  saveEventToSheet(newEvent);
+  clearForm();
+  renderAll();
+  // Show feedback
+  const btn = document.querySelector(".btn-add");
+  const orig = btn.innerHTML;
+  btn.innerHTML = "✅ Event Added! · कार्यक्रम जोडला!";
+  btn.style.background = "#52b788";
+  setTimeout(() => { btn.innerHTML = orig; btn.style.background = ""; }, 2500);
+}
+
+function clearForm() {
+  ["a-title","a-title-mr","a-date","a-time","a-location","a-desc","a-register"].forEach(id => document.getElementById(id).value = "");
+}
+
+// ── Delete event ──
+function deleteEvent(id) {
+  if (!confirm("Delete this event? · हा कार्यक्रम काढून टाकायचा?")) return;
+  deleteEventFromSheet(id);
+  events = events.filter(e => e.id !== id);
+  saveEventsLocally(events); // update cache
+  renderAll();
+}
+
+// ── Edit event ──
+function openEdit(id) {
+  const ev = events.find(e => e.id === id);
+  if (!ev) return;
+  editingId = id;
+  document.getElementById("edit-title").value    = ev.title;
+  document.getElementById("edit-title-mr").value = ev.titleMr || "";
+  document.getElementById("edit-date").value     = ev.date;
+  document.getElementById("edit-time").value     = ev.time || "";
+  document.getElementById("edit-location").value = ev.location;
+  document.getElementById("edit-desc").value     = ev.desc || "";
+  document.getElementById("edit-register").value = ev.register || "";
+  document.getElementById("editModal").classList.add("show");
+}
+function closeModal() {
+  document.getElementById("editModal").classList.remove("show");
+  editingId = null;
+}
+function saveEdit() {
+  if (!editingId) return;
+  const ev = events.find(e => e.id === editingId);
+  if (!ev) return;
+  ev.title    = document.getElementById("edit-title").value.trim();
+  ev.titleMr  = document.getElementById("edit-title-mr").value.trim();
+  ev.date     = document.getElementById("edit-date").value;
+  ev.time     = document.getElementById("edit-time").value;
+  ev.location = document.getElementById("edit-location").value.trim();
+  ev.desc     = document.getElementById("edit-desc").value.trim();
+  ev.register = document.getElementById("edit-register").value.trim();
+  events.sort((a, b) => a.date.localeCompare(b.date));
+  saveEventsLocally(events); // update cache
+  saveEventToSheet(ev);
+  closeModal();
+  renderAll();
+}
+
+// ── Filter ──
+function filterEvents(type, btn) {
+  currentFilter = type;
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  renderEventsList();
+}
+
+// ── Render calendar ──
+function renderCalendar() {
+  document.getElementById("monthLabel").textContent = `${enMonths[currentMonth]} ${currentYear}`;
+  document.getElementById("monthMrLabel").textContent = `${mrMonths[currentMonth]} ${toMrNum(currentYear)}`;
+
+  const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+  const today = new Date();
+
+  const eventDates = new Set(events.map(e => {
+    const d = new Date(e.date);
+    if (d.getMonth() === currentMonth && d.getFullYear() === currentYear)
+      return d.getDate();
+    return null;
+  }).filter(Boolean));
+
+  let html = "";
+  for (let i = 0; i < firstDay; i++) html += `<div class="cal-day empty"></div>`;
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const isToday = d === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear();
+    const hasEv   = eventDates.has(d);
+    const dayEvents = events.filter(e => {
+      const ed = new Date(e.date);
+      return ed.getDate() === d && ed.getMonth() === currentMonth && ed.getFullYear() === currentYear;
+    });
+
+    let dotsHtml = "";
+    dayEvents.forEach(ev => {
+      dotsHtml += `<div class="day-event-dot" onclick="scrollToEvent(${ev.id})" title="${ev.title}">${ev.title.split(" ").slice(0,2).join(" ")}</div>`;
+    });
+
+    html += `<div class="cal-day${isToday ? " today" : ""}${hasEv ? " has-event" : ""}">
+      <div class="day-num">${d}</div>
+      ${dotsHtml}
+    </div>`;
+  }
+
+  document.getElementById("calDays").innerHTML = html;
+}
+
+function changeMonth(dir) {
+  currentMonth += dir;
+  if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+  if (currentMonth < 0)  { currentMonth = 11; currentYear--; }
+  renderCalendar();
+}
+
+// ── Render events list ──
+function renderEventsList() {
+  const today = new Date().toISOString().split("T")[0];
+  let filtered = [...events].filter(e => e.title && e.date); // skip blank rows
+  if (currentFilter === "upcoming") filtered = filtered.filter(e => e.date >= today);
+  if (currentFilter === "past")     filtered = filtered.filter(e => e.date < today);
+
+  if (!filtered.length) {
+    document.getElementById("eventsList").innerHTML = `
+      <div class="empty-state">
+        <div class="ei">📅</div>
+        <h4>No events found</h4>
+        <span class="emr2">कोणतेही कार्यक्रम सापडले नाहीत</span>
+      </div>`;
+    return;
+  }
+
+  document.getElementById("eventsList").innerHTML = filtered.map(ev => {
+    const d   = new Date(ev.date + "T12:00:00");
+    const day = d.getDate();
+    const mon = enMonths[d.getMonth()].substring(0,3).toUpperCase();
+    const yr  = d.getFullYear();
+    const isPast = ev.date < today;
+    const timeStr = ev.time ? ` · ${ev.time.replace(":",":")} ` : "";
+
+    return `
+    <div class="event-card ${isPast ? "past" : "upcoming"}" id="event-${ev.id}">
+      <div class="event-date-box ${isPast ? "past-box" : ""}">
+        <div class="eday">${day}</div>
+        <div class="emon">${mon}</div>
+        <div class="eyr">${yr}</div>
+      </div>
+      <div class="event-body">
+        <h4>${ev.title}</h4>
+        ${ev.titleMr ? `<span class="emr-title">${ev.titleMr}</span>` : ""}
+        <div class="event-meta">
+          <span class="emeta">📍 ${ev.location}</span>
+          ${ev.time ? `<span class="emeta">🕐 ${ev.time}</span>` : ""}
+          <span class="emeta">${isPast ? "✅ Completed · पूर्ण झाले" : "🟢 Upcoming · आगामी"}</span>
+        </div>
+        ${ev.desc ? `<p>${ev.desc}</p>` : ""}
+        ${ev.register ? `<p class="event-register">📋 How to join: ${ev.register}</p>` : ""}
+      </div>
+      <div class="event-actions">
+        ${!isPast ? `<button class="btn-join" onclick="openJoinModal(${ev.id})">Join · सहभागी व्हा</button>` : `<span style="font-size:.75rem;color:#bbb;">Completed<br><span style='font-family:Tiro Devanagari Marathi,serif'>पूर्ण झाले</span></span>`}
+        <button class="btn-edit" onclick="openEdit(${ev.id})">✏️ Edit</button>
+        <button class="btn-delete" onclick="deleteEvent(${ev.id})">🗑️ Delete</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function scrollToEvent(id) {
+  const el = document.getElementById("event-" + id);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function renderAll() {
+  renderCalendar();
+  renderEventsList();
+}
+
+
+// ── Google Sheet + EmailJS Config ──
+// ✅ Your deployed Google Apps Script Web App URL
+const MASTER_SHEET_URL = "https://script.google.com/macros/s/AKfycbww9LiyxfR9EB1q2uSQGmdQJz8AUalgGKhoB5-wF71FocpFiM55dkPenWkKu7D0ZECU_w/exec";
+// Internal sentinel used to detect unconfigured demo mode — do NOT change this
+const _DEMO_SENTINEL = "__DEMO_MODE__";
+
+const EJS_SERVICE  = "YOUR_SERVICE_ID";
+const EJS_TEMPLATE = "YOUR_TEMPLATE_ID";
+const EJS_KEY      = "YOUR_PUBLIC_KEY";
+
+(function() {
+  if (typeof emailjs !== "undefined" && EJS_KEY !== "YOUR_PUBLIC_KEY") emailjs.init(EJS_KEY);
+})();
+
+let currentJoinEventId = null;
+
+function openJoinModal(eventId) {
+  const ev = events.find(e => e.id === eventId);
+  if (!ev) return;
+  currentJoinEventId = eventId;
+
+  // Populate modal header
+  document.getElementById("jm-title").textContent = ev.title;
+  document.getElementById("jm-title-mr").textContent = ev.titleMr || "";
+  const d = new Date(ev.date + "T12:00:00");
+  document.getElementById("jm-date").textContent = "📅 " + d.toDateString();
+  document.getElementById("jm-location").textContent = "📍 " + ev.location;
+
+  // Reset form
+  ["j-name","j-phone","j-email","j-message"].forEach(id => {
+    document.getElementById(id).value = "";
+    document.getElementById(id).classList.remove("error");
+  });
+  document.getElementById("joinFormView").style.display = "block";
+  document.getElementById("joinSuccessView").classList.remove("show");
+  document.getElementById("joinSubmitBtn").disabled = false;
+  document.getElementById("joinSubmitBtn").textContent = "✅ Confirm Registration · नोंदणी करा";
+
+  document.getElementById("joinOverlay").classList.add("show");
+  setTimeout(() => document.getElementById("j-name").focus(), 300);
+}
+
+function closeJoinModal() {
+  document.getElementById("joinOverlay").classList.remove("show");
+  currentJoinEventId = null;
+}
+
+function submitJoin() {
+  const name    = document.getElementById("j-name").value.trim();
+  const phone   = document.getElementById("j-phone").value.trim();
+  const email   = document.getElementById("j-email").value.trim();
+  const message = document.getElementById("j-message").value.trim();
+
+  // Validate
+  let valid = true;
+  if (!name)  { document.getElementById("j-name").classList.add("error");  valid = false; }
+  if (!phone) { document.getElementById("j-phone").classList.add("error"); valid = false; }
+  if (!email || !email.includes("@")) { document.getElementById("j-email").classList.add("error"); valid = false; }
+  if (!valid) return;
+
+  const ev = events.find(e => e.id === currentJoinEventId);
+  const btn = document.getElementById("joinSubmitBtn");
+  btn.disabled = true;
+  btn.textContent = "Sending... · पाठवत आहे...";
+
+  const templateParams = {
+    volunteer_name:  name,
+    volunteer_phone: phone,
+    volunteer_email: email,
+    volunteer_message: message || "No message",
+    event_title:     ev ? ev.title : "Event",
+    event_title_mr:  ev ? (ev.titleMr || "") : "",
+    event_date:      ev ? ev.date : "",
+    event_time:      ev ? (ev.time || "") : "",
+    event_location:  ev ? ev.location : "",
+    reply_to:        email,
+  };
+
+  // Save registration to Google Sheet (always, when URL is configured)
+  if (MASTER_SHEET_URL !== _DEMO_SENTINEL) {
+    fetch(MASTER_SHEET_URL, {
+      method: "POST", mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...templateParams, type: "event_registration", event_id: currentJoinEventId })
+    }).catch(err => console.error("Sheet reg error:", err));
+  }
+
+  // Send email via EmailJS (if configured)
+  if (EJS_SERVICE !== "YOUR_SERVICE_ID" && typeof emailjs !== "undefined") {
+    emailjs.send(EJS_SERVICE, EJS_TEMPLATE, templateParams)
+      .then(() => showJoinSuccess())
+      .catch(err => {
+        console.error("EmailJS error:", err);
+        showJoinSuccess(); // still show success since sheet save worked
+      });
+  } else {
+    setTimeout(() => showJoinSuccess(), 900);
+  }
+}
+
+function showJoinSuccess() {
+  document.getElementById("joinFormView").style.display = "none";
+  document.getElementById("joinSuccessView").classList.add("show");
+  setTimeout(() => closeJoinModal(), 4000);
+}
+
+// Close modal on overlay click
+document.getElementById("joinOverlay").addEventListener("click", function(e) {
+  if (e.target === this) closeJoinModal();
+});
+
+  // ── Scroll reveal ──
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add("visible"), i * 80);
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
+
+// ── Init ──
+loadEventsFromSheet();
+</script>
+</body>
+</html>

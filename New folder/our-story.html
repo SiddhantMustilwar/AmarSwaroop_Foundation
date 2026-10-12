@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Tiro+Devanagari+Marathi:ital@0;1&display=swap" rel="stylesheet">
+  <title>Our Story — Amar Swaroop Foundation</title>
+  <style>
+    /* Fonts loaded via link tags above */
+
+    :root {
+      --saffron: #d4660a;
+      --saffron-light: #f4a14a;
+      --green: #2d6a4f;
+      --green-light: #52b788;
+      --cream: #fdf6ec;
+      --parchment: #f5ede0;
+      --dark: #1c1208;
+      --text: #3d2e1a;
+      --gold: #c9922a;
+      --earth: #b5793a;
+      --accent: #e9c46a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 5%;
+      background: rgba(253,246,236,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(212,102,10,0.12);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    }
+    .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--green); line-height: 1.1; }
+    .logo span { color: var(--saffron); }
+    .nav-right { display: flex; align-items: center; gap: 2rem; }
+    .nav-right a { text-decoration: none; font-size: .85rem; font-weight: 500; color: var(--text); transition: color .2s; }
+    .nav-right a:hover { color: var(--saffron); }
+    .nav-back { background: var(--green); color: #fff !important; padding: .45rem 1.3rem; border-radius: 50px; }
+    .nav-back:hover { background: var(--green-light) !important; }
+
+    /* HERO */
+    .story-hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 8rem 5% 5rem; text-align: center;
+      position: relative; overflow: hidden;
+      background: var(--cream);
+    }
+    .hero-glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse at 15% 25%, rgba(212,102,10,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 75%, rgba(45,106,79,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(201,146,42,0.05) 0%, transparent 60%);
+    }
+    .ring { position: absolute; border-radius: 50%; border: 1px solid rgba(181,121,58,0.08); pointer-events: none; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .ring-1 { width: 720px; height: 720px; }
+    .ring-2 { width: 520px; height: 520px; }
+    .ring-3 { width: 320px; height: 320px; }
+    .hero-eyebrow { font-family: 'Tiro Devanagari Marathi', serif; font-size: 1rem; color: var(--saffron); margin-bottom: 1.2rem; position: relative; z-index: 1; opacity: .85; animation: fadeUp .7s ease both; }
+    .hero-divider { display: flex; align-items: center; gap: 1rem; justify-content: center; margin-bottom: 1.4rem; position: relative; z-index: 1; animation: fadeUp .7s .1s ease both; }
+    .hero-divider-line { width: 55px; height: 1px; background: var(--gold); }
+    .hero-divider-dot { color: var(--gold); font-size: 1.1rem; }
+    h1.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.2rem, 7vw, 6.5rem); font-weight: 300; line-height: 1; color: var(--dark); letter-spacing: -1px; position: relative; z-index: 1; animation: fadeUp .7s .2s ease both; }
+    h1.hero-title em { font-style: italic; color: var(--saffron); }
+    .hero-marathi { font-family: 'Tiro Devanagari Marathi', serif; font-size: clamp(1.4rem, 3vw, 2.2rem); color: var(--green); display: block; margin-top: .5rem; margin-bottom: 1.8rem; position: relative; z-index: 1; animation: fadeUp .7s .3s ease both; }
+    .hero-tagline { font-family: 'Cormorant Garamond', serif; font-size: clamp(.95rem, 2vw, 1.15rem); color: #7a5a38; line-height: 1.85; max-width: 580px; font-style: italic; position: relative; z-index: 1; animation: fadeUp .7s .4s ease both; }
+    .scroll-hint { margin-top: 3.5rem; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: .5rem; color: rgba(60,40,15,0.3); font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; animation: fadeUp .7s .55s ease both; }
+    .scroll-line { width: 1px; height: 55px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollAnim 2s ease-in-out infinite; }
+    @keyframes scrollAnim { 0%,100%{transform:scaleY(1);opacity:1} 50%{transform:scaleY(.5);opacity:.4} }
+
+    /* CITY STRIP */
+    .city-strip { background: var(--green); padding: .9rem 5%; display: flex; align-items: center; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+    .city-pill { display: flex; align-items: center; gap: .5rem; color: rgba(255,255,255,.7); font-size: .82rem; letter-spacing: .5px; }
+    .city-pill strong { color: #fff; }
+    .city-pill .mr { font-family: 'Tiro Devanagari Marathi', serif; font-size: .9rem; }
+
+    /* COMMON */
+    .chapter-wrap { padding: 5.5rem 5%; }
+    .chapter-inner { max-width: 1100px; margin: 0 auto; }
+    .chapter-label { font-size: .72rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--saffron); display: flex; align-items: center; gap: .8rem; margin-bottom: 1.2rem; }
+    .chapter-label::before, .chapter-label::after { content: ''; flex: 0 0 28px; height: 1px; background: var(--saffron); opacity: .5; }
+    h2.chapter-h { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400; color: var(--dark); line-height: 1.15; margin-bottom: .4rem; }
+    h2.chapter-h em { font-style: italic; color: var(--saffron); }
+    .chapter-mr { font-family: 'Tiro Devanagari Marathi', serif; font-size: .98rem; color: var(--green); opacity: .7; margin-bottom: 1.8rem; display: block; }
+    .prose { font-size: 1rem; line-height: 1.9; color: #5a3e22; }
+    .prose p { margin-bottom: 1.3rem; }
+    .prose p:last-child { margin-bottom: 0; }
+
+    /* FOUNDER */
+    .founder-bg { background: var(--parchment); }
+    .founder-grid { display: grid; grid-template-columns: 1fr 1.7fr; gap: 4rem; align-items: center; }
+    .portrait-box { aspect-ratio: 3/4; border-radius: 4px 70px 4px 70px; background: linear-gradient(135deg, #f4a14a, #c9922a, #d4660a); display: flex; align-items: center; justify-content: center; font-size: 6rem; position: relative; box-shadow: 16px 16px 0 rgba(45,106,79,.15); }
+    .name-card { position: absolute; bottom: -18px; right: -18px; background: var(--green); color: #fff; padding: .9rem 1.3rem; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+    .name-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; }
+    .name-card .mr-name { font-family: 'Tiro Devanagari Marathi', serif; font-size: .88rem; opacity: .75; display: block; margin-top: .1rem; }
+    .name-card p { font-size: .72rem; opacity: .55; margin-top: .2rem; }
+    .pull-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--saffron); border-left: 3px solid var(--saffron); padding-left: 1.4rem; margin: 1.8rem 0; line-height: 1.65; }
+    .pull-quote small { font-size: .82rem; color: #a07050; font-style: normal; display: block; margin-top: .4rem; }
+
+    /* QUOTE BAND */
+    .quote-band { background: var(--saffron); padding: 3.5rem 5%; text-align: center; position: relative; overflow: hidden; }
+    .quote-band::before { content: '✦ ❋ ✦ ❋ ✦ ❋ ✦'; position: absolute; top: .8rem; left: 0; right: 0; text-align: center; font-size: .9rem; color: rgba(255,255,255,.15); letter-spacing: 1rem; }
+    .quote-band::after  { content: '✦ ❋ ✦ ❋ ✦ ❋ ✦'; position: absolute; bottom: .8rem; left: 0; right: 0; text-align: center; font-size: .9rem; color: rgba(255,255,255,.15); letter-spacing: 1rem; }
+    .qb-inner { max-width: 740px; margin: 0 auto; position: relative; z-index: 1; }
+    .qb-marathi { font-family: 'Tiro Devanagari Marathi', serif; font-size: clamp(1.3rem, 3vw, 2rem); color: #fff; line-height: 1.65; margin-bottom: .6rem; }
+    .qb-en { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: rgba(255,255,255,.65); margin-bottom: .4rem; }
+    .qb-attr { font-size: .75rem; color: rgba(255,255,255,.4); letter-spacing: 2px; text-transform: uppercase; }
+
+    /* TIMELINE */
+    .timeline-wrap { background: var(--dark); padding: 5.5rem 5%; }
+    .tl-inner { max-width: 840px; margin: 0 auto; }
+    .tl-header { text-align: center; margin-bottom: 3.5rem; }
+    .tl-header .chapter-label { justify-content: center; color: var(--saffron-light); }
+    .tl-header .chapter-label::before, .tl-header .chapter-label::after { background: var(--saffron-light); }
+    .tl-header h2 { color: #fff; }
+    .tl-header .chapter-mr { color: rgba(255,255,255,.35); }
+    .tl { position: relative; }
+    .tl::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, var(--gold), var(--saffron), var(--gold), transparent); transform: translateX(-50%); }
+    .tl-item { display: grid; grid-template-columns: 1fr 52px 1fr; margin-bottom: 2.8rem; align-items: start; }
+    .tl-item:nth-child(odd)  .tl-body { grid-column: 1; text-align: right; padding-right: 2rem; }
+    .tl-item:nth-child(odd)  .tl-blank { grid-column: 3; }
+    .tl-item:nth-child(even) .tl-body { grid-column: 3; text-align: left;  padding-left: 2rem; }
+    .tl-item:nth-child(even) .tl-blank { grid-column: 1; }
+    .tl-dot { grid-column: 2; display: flex; align-items: flex-start; justify-content: center; padding-top: .2rem; position: relative; z-index: 1; }
+    .tl-dot-i { width: 40px; height: 40px; border-radius: 50%; background: var(--saffron); display: flex; align-items: center; justify-content: center; font-size: 1rem; box-shadow: 0 0 0 6px rgba(212,102,10,.2); }
+    .tl-year { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; color: var(--saffron-light); line-height: 1; margin-bottom: .3rem; }
+    .tl-title { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: #fff; margin-bottom: .25rem; }
+    .tl-mr { font-family: 'Tiro Devanagari Marathi', serif; font-size: .8rem; color: rgba(255,255,255,.3); display: block; margin-bottom: .4rem; }
+    .tl-desc { font-size: .85rem; color: rgba(255,255,255,.45); line-height: 1.7; }
+
+    /* VALUES */
+    .values-wrap { padding: 5.5rem 5%; background: var(--cream); }
+    .values-inner { max-width: 1100px; margin: 0 auto; }
+    .values-header { text-align: center; margin-bottom: 3rem; }
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
+    .val-card { padding: 2rem 1.8rem; border: 1px solid rgba(181,121,58,.15); border-radius: 2px 20px 2px 20px; background: #fff; transition: transform .3s, box-shadow .3s; position: relative; overflow: hidden; }
+    .val-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(to right, var(--saffron), var(--gold)); transform: scaleX(0); transform-origin: left; transition: transform .4s; }
+    .val-card:hover::after { transform: scaleX(1); }
+    .val-card:hover { transform: translateY(-5px); box-shadow: 0 18px 45px rgba(181,121,58,.1); }
+    .val-icon { font-size: 2.2rem; margin-bottom: .9rem; }
+    .val-en { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--dark); margin-bottom: .2rem; }
+    .val-mr { font-family: 'Tiro Devanagari Marathi', serif; font-size: .9rem; color: var(--saffron); display: block; margin-bottom: .6rem; }
+    .val-desc { font-size: .86rem; line-height: 1.7; color: #7a5a38; }
+
+    /* VISION */
+    .vision-wrap { padding: 5.5rem 5%; background: var(--parchment); }
+    .vision-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center; }
+    .vision-box { background: var(--green); border-radius: 4px 40px 4px 40px; padding: 2.5rem; text-align: center; }
+    .vb-marathi { font-family: 'Tiro Devanagari Marathi', serif; font-size: 1.35rem; color: var(--saffron-light); line-height: 1.65; margin-bottom: .9rem; }
+    .vb-en { font-family: 'Cormorant Garamond', serif; font-size: .95rem; font-style: italic; color: rgba(255,255,255,.6); line-height: 1.7; }
+    .vision-dots { display: flex; flex-direction: column; gap: 1.1rem; margin-top: 1.8rem; }
+    .vd { display: flex; gap: .9rem; align-items: flex-start; }
+    .vd-icon { width: 34px; height: 34px; min-width: 34px; background: rgba(181,121,58,.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .9rem; }
+    .vd-text h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--dark); margin-bottom: .15rem; }
+    .vd-text p { font-size: .84rem; color: #7a5a38; line-height: 1.6; }
+
+    /* CTA */
+    .cta-wrap { background: var(--dark); padding: 5rem 5%; text-align: center; }
+    .cta-rangoli { font-size: 1rem; color: rgba(255,255,255,.07); letter-spacing: 1.5rem; display: block; margin-bottom: 2rem; }
+    .cta-wrap h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; color: #fff; margin-bottom: .5rem; }
+    .cta-wrap h2 em { font-style: italic; color: var(--saffron-light); }
+    .cta-mr { font-family: 'Tiro Devanagari Marathi', serif; font-size: 1rem; color: rgba(255,255,255,.3); display: block; margin-bottom: 2rem; }
+    .cta-desc { color: rgba(255,255,255,.45); max-width: 480px; margin: 0 auto 2.5rem; font-size: .92rem; line-height: 1.8; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-saffron { background: var(--saffron); color: #fff; padding: .9rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 500; transition: transform .2s, box-shadow .2s; box-shadow: 0 4px 20px rgba(212,102,10,.4); }
+    .btn-saffron:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,102,10,.5); }
+    .btn-outline { background: transparent; color: #fff; padding: .9rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 500; border: 1px solid rgba(255,255,255,.25); transition: background .2s; }
+    .btn-outline:hover { background: rgba(255,255,255,.08); }
+
+    /* FOOTER */
+    .story-footer { background: #111; padding: 1.8rem 5%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .story-footer .logo { color: var(--green); }
+    .story-footer p { font-size: .8rem; color: rgba(255,255,255,.3); }
+    .footer-mr { font-family: 'Tiro Devanagari Marathi', serif; font-size: .85rem; color: rgba(255,255,255,.2); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(38px); transition: opacity .75s ease, transform .75s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-l { opacity: 0; transform: translateX(-38px); transition: opacity .75s ease, transform .75s ease; }
+    .reveal-l.visible { opacity: 1; transform: translateX(0); }
+    .reveal-r { opacity: 0; transform: translateX(38px); transition: opacity .75s ease, transform .75s ease; }
+    .reveal-r.visible { opacity: 1; transform: translateX(0); }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .founder-grid, .vision-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .values-grid { grid-template-columns: 1fr; }
+      .tl::before { left: 20px; }
+      .tl-item { grid-template-columns: 42px 1fr; }
+      .tl-item:nth-child(odd) .tl-body,
+      .tl-item:nth-child(even) .tl-body { grid-column: 2; text-align: left; padding-right: 0; padding-left: 1.2rem; }
+      .tl-item:nth-child(odd) .tl-blank,
+      .tl-item:nth-child(even) .tl-blank { display: none; }
+      .tl-dot { grid-column: 1; }
+      .nav-right a:not(.nav-back) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Amar<span>Swaroop</span><br>Foundation</div>
+  <div class="nav-right">
+    <a href="index.html">Home</a>
+    <a href="#timeline">Journey</a>
+    <a href="#values">Values</a>
+    <a href="index.html" class="nav-back">← Main Website</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="story-hero">
+  <div class="hero-glow"></div>
+  <div class="ring ring-1"></div>
+  <div class="ring ring-2"></div>
+  <div class="ring ring-3"></div>
+  <p class="hero-eyebrow">आमची कहाणी &nbsp;·&nbsp; Est. 2017, Nagpur</p>
+  <div class="hero-divider">
+    <div class="hero-divider-line"></div>
+    <div class="hero-divider-dot">❋</div>
+    <div class="hero-divider-line"></div>
+  </div>
+  <h1 class="hero-title">Our <em>Story</em></h1>
+  <span class="hero-marathi">आमची कहाणी</span>
+  <p class="hero-tagline">"One man's resolve, one city's discarded waste,<br>and a dream that became thousands of lives transformed."</p>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- CITY STRIP -->
+<div class="city-strip">
+  <div class="city-pill">📍 <strong>Born in</strong> <span class="mr">नागपूर, महाराष्ट्र</span></div>
+  <div class="city-pill">🗓️ <strong>Founded</strong> 2017</div>
+  <div class="city-pill">👤 <strong>Founder</strong> Manoj Band</div>
+  <div class="city-pill">♻️ <span class="mr">कचऱ्यातून जीवन</span></div>
+</div>
+
+<!-- CHAPTER 1: THE BEGINNING -->
+<div class="chapter-wrap">
+  <div class="chapter-inner">
+    <div class="chapter-label reveal">Chapter One &nbsp;·&nbsp; सुरुवात</div>
+    <h2 class="chapter-h reveal">It Began With a <em>Single Walk</em></h2>
+    <span class="chapter-mr reveal">एका फेरीपासून सुरुवात झाली</span>
+    <div class="prose reveal">
+      <p>In the narrow lanes of Nagpur, where the morning sun turns the old city walls golden, a young man named <strong>Manoj Band</strong> was walking through his neighbourhood in 2017. It was an ordinary morning — except for what he saw. Heaped outside every third door were piles of discarded objects: a broken chair, tangled wires, worn-out clothes, rusted utensils. Things that people had given up on.</p>
+      <p>But a few streets away, Manoj had seen something else — a family sitting on the floor because they had no furniture. Children doing homework in dim light because they could not afford a proper lamp. The contrast lodged itself deep in his heart and would not let go.</p>
+      <p>That evening, he asked himself a question that would change his life: <em>"जर हे कचरा त्यांच्यापर्यंत पोहोचवता आले तर?"</em> — "What if this waste could reach the ones who need it most?"</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOUNDER -->
+<div class="chapter-wrap founder-bg">
+  <div class="chapter-inner">
+    <div class="founder-grid">
+      <div class="reveal-l">
+        <div class="portrait-box">
+          🌱
+          <div class="name-card">
+            <h4>Manoj Band</h4>
+            <span class="mr-name">मनोज बंड</span>
+            <p>Founder, Amar Swaroop Foundation</p>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-r">
+        <div class="chapter-label">The Founder &nbsp;·&nbsp; संस्थापक</div>
+        <h2 class="chapter-h">A Heart That <em>Refused</em><br>to Look Away</h2>
+        <span class="chapter-mr">एक मन जे दुर्लक्ष करू शकले नाही</span>
+        <div class="prose">
+          <p>Manoj Band grew up in Nagpur — Maharashtra's Orange City — deeply aware of the inequalities within its streets. He witnessed how much perfectly usable material was discarded every single day, while just around the corner, families lived without basic necessities.</p>
+          <p>He was not an entrepreneur by profession, nor a social worker by training. He was simply a person who cared — deeply, stubbornly, relentlessly. In 2017, with no funding, no office, and just a handful of willing friends, he started going door to door.</p>
+        </div>
+        <blockquote class="pull-quote">
+          "मी एकट्याने सुरू केलं, पण हे काम कधीच माझं एकट्याचं नव्हतं — हे नागपूरच्या प्रत्येक माणसाचं आहे."
+          <small>"I started alone, but this work was never mine alone — it belongs to every person of Nagpur."</small>
+        </blockquote>
+        <div class="prose">
+          <p>Today, Manoj continues to lead every initiative personally — from planning collection drives to overseeing upcycling workshops — driven by the same conviction he had on that very first walk in 2017.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUOTE BAND -->
+<div class="quote-band">
+  <div class="qb-inner">
+    <p class="qb-marathi">"कचरा म्हणजे फक्त टाकाऊ वस्तू नाही — तो एक संधी आहे."</p>
+    <p class="qb-en">"Waste is not just something discarded — it is an opportunity."</p>
+    <p class="qb-attr">— Manoj Band &nbsp;·&nbsp; संस्थापक, Amar Swaroop Foundation</p>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="timeline-wrap" id="timeline">
+  <div class="tl-inner">
+    <div class="tl-header">
+      <div class="chapter-label">The Journey &nbsp;·&nbsp; प्रवास</div>
+      <h2 class="chapter-h">Milestones That <em>Matter</em></h2>
+      <span class="chapter-mr">प्रत्येक पाऊल महत्त्वाचा</span>
+    </div>
+    <div class="tl">
+      <div class="tl-item reveal">
+        <div class="tl-body">
+          <div class="tl-year">2017</div>
+          <div class="tl-title">The First Step</div>
+          <span class="tl-mr">पहिले पाऊल</span>
+          <p class="tl-desc">Manoj begins with a bicycle and a vision. The first collection drive covers 12 homes in one neighbourhood. One repaired chair is given to a family in need — and everything changes.</p>
+        </div>
+        <div class="tl-dot"><div class="tl-dot-i">🚪</div></div>
+        <div class="tl-blank"></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-blank"></div>
+        <div class="tl-dot"><div class="tl-dot-i">🛠️</div></div>
+        <div class="tl-body">
+          <div class="tl-year">2018</div>
+          <div class="tl-title">First Upcycling Workshop</div>
+          <span class="tl-mr">पहिली कार्यशाळा</span>
+          <p class="tl-desc">A small workshop brings local artisans together. Old fabric becomes quilts. Scrap metal becomes tools. The upcycling dream becomes beautifully, tangibly real.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-body">
+          <div class="tl-year">2019</div>
+          <div class="tl-title">100 Families Reached</div>
+          <span class="tl-mr">१०० कुटुंबांपर्यंत</span>
+          <p class="tl-desc">A landmark moment. The 100th family is helped. Volunteers begin joining from across Nagpur, moved by what is being built from nothing but love and determination.</p>
+        </div>
+        <div class="tl-dot"><div class="tl-dot-i">🏠</div></div>
+        <div class="tl-blank"></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-blank"></div>
+        <div class="tl-dot"><div class="tl-dot-i">💪</div></div>
+        <div class="tl-body">
+          <div class="tl-year">2020</div>
+          <div class="tl-title">Growing Through Hardship</div>
+          <span class="tl-mr">संकटातूनही वाढ</span>
+          <p class="tl-desc">Despite the pandemic halting the world, the foundation pivots to deliver essentials to vulnerable families. The crisis reveals just how critical this work truly is.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-body">
+          <div class="tl-year">2022</div>
+          <div class="tl-title">1,000+ Products Created</div>
+          <span class="tl-mr">१,०००+ उत्पादने</span>
+          <p class="tl-desc">A major milestone — over 1,000 products crafted from waste and delivered with dignity to families across multiple Nagpur neighbourhoods.</p>
+        </div>
+        <div class="tl-dot"><div class="tl-dot-i">🎁</div></div>
+        <div class="tl-blank"></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-blank"></div>
+        <div class="tl-dot"><div class="tl-dot-i">🌱</div></div>
+        <div class="tl-body">
+          <div class="tl-year">Today</div>
+          <div class="tl-title">Still Growing, Still Giving</div>
+          <span class="tl-mr">अजूनही देतोय</span>
+          <p class="tl-desc">500+ families helped. 10,000+ kg collected. 1,200+ products made. 50+ volunteers. And Manoj still on the streets of Nagpur every single week.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VALUES -->
+<div class="values-wrap" id="values">
+  <div class="values-inner">
+    <div class="values-header">
+      <div class="chapter-label reveal" style="justify-content:center;">What We Stand For &nbsp;·&nbsp; आमची मूल्ये</div>
+      <h2 class="chapter-h reveal">Built on <em>Belief</em></h2>
+      <span class="chapter-mr reveal">विश्वासावर उभे आहोत</span>
+    </div>
+    <div class="values-grid">
+      <div class="val-card reveal">
+        <div class="val-icon">♻️</div>
+        <div class="val-en">Nothing Wasted</div>
+        <span class="val-mr">काहीही वाया जाऊ नये</span>
+        <p class="val-desc">Every object, every material, every person holds value. Nothing is truly waste — only potential waiting to be unlocked.</p>
+      </div>
+      <div class="val-card reveal">
+        <div class="val-icon">🤝</div>
+        <div class="val-en">Community First</div>
+        <span class="val-mr">समाज प्रथम</span>
+        <p class="val-desc">We are of Nagpur, for Nagpur. Our work begins and ends with the people — donors, volunteers, and the families we serve.</p>
+      </div>
+      <div class="val-card reveal">
+        <div class="val-icon">🌱</div>
+        <div class="val-en">Dignity Always</div>
+        <span class="val-mr">सदैव सन्मान</span>
+        <p class="val-desc">Every product we give is crafted with care. How you give matters just as much as what you give.</p>
+      </div>
+      <div class="val-card reveal">
+        <div class="val-icon">🔥</div>
+        <div class="val-en">Relentless Action</div>
+        <span class="val-mr">अखंड कृती</span>
+        <p class="val-desc">There are no off days when people are in need. We show up — street by street, door by door, every day.</p>
+      </div>
+      <div class="val-card reveal">
+        <div class="val-icon">💡</div>
+        <div class="val-en">Creative Thinking</div>
+        <span class="val-mr">सर्जनशील विचार</span>
+        <p class="val-desc">We turn broken things into beautiful ones. We find solutions where others see only problems.</p>
+      </div>
+      <div class="val-card reveal">
+        <div class="val-icon">💚</div>
+        <div class="val-en">Love in Action</div>
+        <span class="val-mr">कृतीतील प्रेम</span>
+        <p class="val-desc">This isn't charity — it's love in its most practical form. Every collection and delivery is an act of love for our city.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VISION -->
+<div class="vision-wrap">
+  <div class="vision-inner">
+    <div class="reveal-l">
+      <div class="chapter-label">Looking Ahead &nbsp;·&nbsp; भविष्य</div>
+      <h2 class="chapter-h">The Dream <em>Continues</em></h2>
+      <span class="chapter-mr">स्वप्न सुरूच आहे</span>
+      <div class="prose">
+        <p>Manoj Band's vision goes far beyond today. He dreams of a Nagpur where no usable material ever reaches a landfill, and no family goes without basic necessities.</p>
+      </div>
+      <div class="vision-dots">
+        <div class="vd reveal"><div class="vd-icon">🏙️</div><div class="vd-text"><h4>Every Ward in Nagpur</h4><p>Expanding door-to-door collection to all 145 wards of Nagpur city.</p></div></div>
+        <div class="vd reveal"><div class="vd-icon">🧑‍🎓</div><div class="vd-text"><h4>Skills for Life</h4><p>Training underprivileged youth in upcycling crafts, creating lasting livelihoods.</p></div></div>
+        <div class="vd reveal"><div class="vd-icon">🌾</div><div class="vd-text"><h4>Beyond the City</h4><p>Bringing the model to rural Maharashtra — villages where need is even greater.</p></div></div>
+        <div class="vd reveal"><div class="vd-icon">🔁</div><div class="vd-text"><h4>A Circular Maharashtra</h4><p>Inspiring a statewide movement where waste is seen as a gift, not garbage.</p></div></div>
+      </div>
+    </div>
+    <div class="reveal-r">
+      <div class="vision-box">
+        <p class="vb-marathi">"जोपर्यंत एकही घर रिकाम्या हाताने आहे, तोपर्यंत आमचे काम संपणार नाही."</p>
+        <p class="vb-en">"As long as a single home remains empty-handed, our work will not stop."<br><br>— Manoj Band</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-wrap">
+  <span class="cta-rangoli">✦ ❋ ✦ ❋ ✦ ❋ ✦ ❋ ✦</span>
+  <h2 class="reveal">Be Part of <em>This Story</em></h2>
+  <span class="cta-mr reveal">या कहाणीचा भाग व्हा</span>
+  <p class="cta-desc reveal">Manoj's story is still being written — and you can be part of the next chapter. Donate your waste, volunteer your time, or simply spread the word.</p>
+  <div class="cta-btns reveal">
+    <a href="index.html#forms-section" class="btn-saffron">Join the Foundation</a>
+    <a href="index.html" class="btn-outline">← Main Website</a>
+  </div>
+  <span class="cta-rangoli" style="margin-top:2rem;">✦ ❋ ✦ ❋ ✦ ❋ ✦ ❋ ✦</span>
+</div>
+
+<!-- FOOTER -->
+<footer class="story-footer">
+  <div class="logo">Amar<span>Swaroop</span> Foundation</div>
+  <p class="footer-mr">नागपूर, महाराष्ट्र · २०१७ पासून</p>
+  <p>© 2025 · Made with 💚 in Nagpur</p>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 90);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

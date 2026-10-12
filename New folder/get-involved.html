@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Tiro+Devanagari+Marathi:ital@0;1&display=swap" rel="stylesheet">
+  <title>Get Involved — Amar Swaroop Foundation</title>
+  <style>
+    :root{--saffron:#d4660a;--saffron-light:#f4a14a;--green:#2d6a4f;--green-light:#52b788;--cream:#fdf6ec;--parchment:#f5ede0;--dark:#1c1208;--text:#3d2e1a;--gold:#c9922a;--earth:#b5793a;}
+    *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 5%;background:rgba(253,246,236,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,102,10,0.12);box-shadow:0 2px 20px rgba(0,0,0,0.06);}
+    .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--green);line-height:1.1;}.logo span{color:var(--saffron);}
+    .nav-right{display:flex;align-items:center;gap:2rem;}
+    .nav-right a{text-decoration:none;font-size:.85rem;font-weight:500;color:var(--text);transition:color .2s;}.nav-right a:hover{color:var(--saffron);}
+    .nav-back{background:var(--green);color:#fff !important;padding:.45rem 1.3rem;border-radius:50px;}.nav-back:hover{background:var(--green-light) !important;}
+    /* HERO */
+    .page-hero{min-height:85vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8rem 5% 5rem;text-align:center;position:relative;overflow:hidden;background:var(--cream);}
+    .hero-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 15% 25%,rgba(212,102,10,0.08) 0%,transparent 50%),radial-gradient(ellipse at 85% 75%,rgba(45,106,79,0.08) 0%,transparent 50%);}
+    .ring{position:absolute;border-radius:50%;border:1px solid rgba(181,121,58,0.08);pointer-events:none;top:50%;left:50%;transform:translate(-50%,-50%);}
+    .ring-1{width:700px;height:700px;}.ring-2{width:500px;height:500px;}.ring-3{width:300px;height:300px;}
+    .hero-eyebrow{font-family:'Tiro Devanagari Marathi',serif;font-size:1rem;color:var(--saffron);margin-bottom:1.2rem;position:relative;z-index:1;opacity:.85;animation:fadeUp .7s ease both;}
+    .hero-divider{display:flex;align-items:center;gap:1rem;justify-content:center;margin-bottom:1.4rem;position:relative;z-index:1;animation:fadeUp .7s .1s ease both;}
+    .hdl{width:55px;height:1px;background:var(--gold);}.hdd{color:var(--gold);font-size:1.1rem;}
+    h1.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,6rem);font-weight:300;line-height:1;color:var(--dark);letter-spacing:-1px;position:relative;z-index:1;animation:fadeUp .7s .2s ease both;}
+    h1.hero-title em{font-style:italic;color:var(--saffron);}
+    .hero-marathi{font-family:'Tiro Devanagari Marathi',serif;font-size:clamp(1.3rem,3vw,2rem);color:var(--green);display:block;margin-top:.5rem;margin-bottom:1.8rem;position:relative;z-index:1;animation:fadeUp .7s .3s ease both;}
+    .hero-tagline{font-family:'Cormorant Garamond',serif;font-size:clamp(.95rem,2vw,1.15rem);color:#7a5a38;line-height:1.85;max-width:580px;font-style:italic;position:relative;z-index:1;animation:fadeUp .7s .4s ease both;}
+    .scroll-hint{margin-top:3rem;position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:.5rem;color:rgba(60,40,15,0.3);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;animation:fadeUp .7s .55s ease both;}
+    .scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollAnim 2s ease-in-out infinite;}
+    @keyframes scrollAnim{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(.5);opacity:.4}}
+    /* STRIPS & SECTIONS */
+    .green-strip{background:var(--green);padding:.9rem 5%;display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap;}
+    .gpill{display:flex;align-items:center;gap:.5rem;color:rgba(255,255,255,.7);font-size:.82rem;letter-spacing:.5px;}.gpill strong{color:#fff;}.gpill .mr{font-family:'Tiro Devanagari Marathi',serif;font-size:.9rem;}
+    .sec{padding:5.5rem 5%;}.sec-inner{max-width:1100px;margin:0 auto;}
+    .sec-dark{background:var(--dark);padding:5.5rem 5%;}.sec-parch{background:var(--parchment);padding:5.5rem 5%;}
+    .clabel{font-size:.72rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--saffron);display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem;}
+    .clabel::before,.clabel::after{content:'';flex:0 0 28px;height:1px;background:var(--saffron);opacity:.5;}
+    .clabel-c{justify-content:center;}.clabel-w{color:var(--saffron-light)}.clabel-w::before,.clabel-w::after{background:var(--saffron-light);}
+    h2.ch{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:400;color:var(--dark);line-height:1.15;margin-bottom:.4rem;}
+    h2.ch em{font-style:italic;color:var(--saffron);}
+    h2.ch-w{color:#fff;}h2.ch-w em{color:var(--saffron-light);}
+    .cmr{font-family:'Tiro Devanagari Marathi',serif;font-size:.95rem;color:var(--green);opacity:.7;margin-bottom:1.8rem;display:block;}
+    .cmr-w{color:rgba(255,255,255,.35);}
+    .prose{font-size:1rem;line-height:1.9;color:#5a3e22;}.prose p{margin-bottom:1.3rem;}.prose p:last-child{margin-bottom:0;}
+    /* CARDS */
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-top:2.5rem;}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2.5rem;}
+    .card{padding:2rem 1.8rem;border:1px solid rgba(181,121,58,.15);border-radius:2px 20px 2px 20px;background:#fff;transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden;}
+    .card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--saffron),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+    .card:hover::after{transform:scaleX(1);}.card:hover{transform:translateY(-5px);box-shadow:0 18px 45px rgba(181,121,58,.1);}
+    .card-dark{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:2rem;transition:background .3s,transform .2s;}
+    .card-dark:hover{background:rgba(255,255,255,.09);transform:translateY(-4px);}
+    .card-icon{font-size:2.5rem;margin-bottom:1rem;}
+    .card-en{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--dark);margin-bottom:.2rem;}
+    .card-en-w{color:#fff;}
+    .card-mr{font-family:'Tiro Devanagari Marathi',serif;font-size:.88rem;color:var(--saffron);display:block;margin-bottom:.6rem;}
+    .card-mr-w{color:var(--saffron-light);}
+    .card-desc{font-size:.86rem;line-height:1.7;color:#7a5a38;}.card-desc-w{color:rgba(255,255,255,.5);}
+    /* QUOTE BAND */
+    .qband{background:var(--saffron);padding:3.5rem 5%;text-align:center;position:relative;overflow:hidden;}
+    .qband::before{content:'✦ ❋ ✦ ❋ ✦ ❋ ✦';position:absolute;top:.8rem;left:0;right:0;text-align:center;font-size:.9rem;color:rgba(255,255,255,.15);letter-spacing:1rem;}
+    .qband::after{content:'✦ ❋ ✦ ❋ ✦ ❋ ✦';position:absolute;bottom:.8rem;left:0;right:0;text-align:center;font-size:.9rem;color:rgba(255,255,255,.15);letter-spacing:1rem;}
+    .qb-inner{max-width:740px;margin:0 auto;position:relative;z-index:1;}
+    .qb-mr{font-family:'Tiro Devanagari Marathi',serif;font-size:clamp(1.3rem,3vw,2rem);color:#fff;line-height:1.65;margin-bottom:.6rem;}
+    .qb-en{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:rgba(255,255,255,.65);margin-bottom:.4rem;}
+    .qb-attr{font-size:.75rem;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase;}
+    /* TWO-COL */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1100px;margin:0 auto;}
+    .two-col-3{display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:center;max-width:1100px;margin:0 auto;}
+    .green-box{background:var(--green);border-radius:4px 40px 4px 40px;padding:2.5rem;text-align:center;}
+    .gb-mr{font-family:'Tiro Devanagari Marathi',serif;font-size:1.3rem;color:var(--saffron-light);line-height:1.65;margin-bottom:.8rem;}
+    .gb-en{font-family:'Cormorant Garamond',serif;font-size:.92rem;font-style:italic;color:rgba(255,255,255,.6);line-height:1.7;}
+    /* STAT ROW */
+    .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:2.5rem;}
+    .stat-box{text-align:center;padding:2rem 1rem;background:#fff;border-radius:2px 20px 2px 20px;border:1px solid rgba(181,121,58,.12);}
+    .stat-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:var(--saffron);line-height:1;}
+    .stat-lbl{font-size:.85rem;color:#7a5a38;margin-top:.3rem;}
+    .stat-mr{font-family:'Tiro Devanagari Marathi',serif;font-size:.78rem;color:var(--green);display:block;margin-top:.2rem;opacity:.7;}
+    /* STEP ROW */
+    .steps{display:flex;flex-direction:column;gap:1.2rem;}
+    .step{display:flex;gap:1.2rem;align-items:flex-start;padding:1.4rem;background:#fff;border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.05);transition:transform .2s;}
+    .step:hover{transform:translateX(6px);}
+    .step-num{width:40px;height:40px;min-width:40px;background:var(--saffron);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;}
+    .step-body h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--dark);margin-bottom:.2rem;}
+    .step-body .smr{font-family:'Tiro Devanagari Marathi',serif;font-size:.78rem;color:var(--saffron);display:block;margin-bottom:.3rem;}
+    .step-body p{font-size:.86rem;line-height:1.65;color:#7a5a38;}
+    /* CTA */
+    .cta-wrap{background:var(--dark);padding:5rem 5%;text-align:center;}
+    .cta-rangoli{font-size:1rem;color:rgba(255,255,255,.07);letter-spacing:1.5rem;display:block;margin-bottom:2rem;}
+    .cta-wrap h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;color:#fff;margin-bottom:.5rem;}
+    .cta-wrap h2 em{font-style:italic;color:var(--saffron-light);}
+    .cta-mr{font-family:'Tiro Devanagari Marathi',serif;font-size:1rem;color:rgba(255,255,255,.3);display:block;margin-bottom:2rem;}
+    .cta-desc{color:rgba(255,255,255,.45);max-width:480px;margin:0 auto 2.5rem;font-size:.92rem;line-height:1.8;}
+    .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+    .btn-s{background:var(--saffron);color:#fff;padding:.9rem 2.5rem;border-radius:50px;text-decoration:none;font-weight:500;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(212,102,10,.4);}
+    .btn-s:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(212,102,10,.5);}
+    .btn-o{background:transparent;color:#fff;padding:.9rem 2.5rem;border-radius:50px;text-decoration:none;font-weight:500;border:1px solid rgba(255,255,255,.25);transition:background .2s;}
+    .btn-o:hover{background:rgba(255,255,255,.08);}
+    .btn-g{background:var(--green);color:#fff;padding:.9rem 2.5rem;border-radius:50px;text-decoration:none;font-weight:500;transition:transform .2s;box-shadow:0 4px 20px rgba(45,106,79,.3);}
+    .btn-g:hover{transform:translateY(-2px);}
+    /* FOOTER */
+    .pg-footer{background:#111;padding:1.8rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+    .pg-footer .logo{color:var(--green);}.pg-footer p{font-size:.8rem;color:rgba(255,255,255,.3);}
+    .fmr{font-family:'Tiro Devanagari Marathi',serif;font-size:.85rem;color:rgba(255,255,255,.2);}
+    /* ANIMATIONS */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    .reveal{opacity:0;transform:translateY(38px);transition:opacity .75s ease,transform .75s ease;}.reveal.visible{opacity:1;transform:translateY(0);}
+    .reveal-l{opacity:0;transform:translateX(-38px);transition:opacity .75s ease,transform .75s ease;}.reveal-l.visible{opacity:1;transform:translateX(0);}
+    .reveal-r{opacity:0;transform:translateX(38px);transition:opacity .75s ease,transform .75s ease;}.reveal-r.visible{opacity:1;transform:translateX(0);}
+    @media(max-width:768px){
+      .grid-3,.grid-2,.two-col,.two-col-3,.stat-row{grid-template-columns:1fr;gap:1.5rem;}
+      .nav-right a:not(.nav-back){display:none;}
+    }
+  </style>
+</head>
+<body><nav>
+  <div class="logo">Amar<span>Swaroop</span><br>Foundation</div>
+  <div class="nav-right">
+    <a href="our-story.html" >Our Story</a><a href="our-mission.html" >Mission</a><a href="our-impact.html" >Impact</a>
+    <a href="index.html" class="nav-back">← Main Website</a>
+  </div>
+</nav><section class="page-hero">
+  <div class="hero-glow"></div>
+  <div class="ring ring-1"></div><div class="ring ring-2"></div><div class="ring ring-3"></div>
+  <p class="hero-eyebrow">सहभागी व्हा &nbsp;·&nbsp; नागपूर, महाराष्ट्र</p>
+  <div class="hero-divider"><div class="hdl"></div><div class="hdd">❋</div><div class="hdl"></div></div>
+  <h1 class="hero-title">Get <em>Involved</em></h1>
+  <span class="hero-marathi">सहभागी व्हा</span>
+  <p class="hero-tagline">"This movement grows with every person who chooses to act. The next chapter is waiting — for you."</p>
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<div class="green-strip">
+  <div class="gpill">♻️ <span class="mr">कचरा द्या</span></div>
+  <div class="gpill">🙌 <span class="mr">स्वयंसेवक व्हा</span></div>
+  <div class="gpill">💛 <span class="mr">देणगी द्या</span></div>
+  <div class="gpill">📣 <span class="mr">पसरवा</span></div>
+</div>
+
+<!-- THREE WAYS -->
+<div class="sec">
+  <div class="sec-inner">
+    <div class="clabel clabel-c reveal" style="justify-content:center;">Three Ways to Help &nbsp;·&nbsp; मदत करण्याचे तीन मार्ग</div>
+    <h2 class="ch reveal" style="text-align:center;">Choose Your <em>Way</em> to Give</h2>
+    <span class="cmr reveal" style="text-align:center;">देण्याचा आपला मार्ग निवडा</span>
+    <div class="grid-3">
+      <div class="card reveal">
+        <div class="card-icon">♻️</div>
+        <div class="card-en">Donate Your Waste</div>
+        <span class="card-mr">कचरा दान करा</span>
+        <p class="card-desc">Schedule a free door-to-door pickup of your unwanted items. Old furniture, electronics, fabric, utensils, toys, books — anything you no longer need could be someone else's treasure.</p>
+        <br><a href="index.html#forms-section" style="color:var(--saffron);font-size:.85rem;font-weight:500;text-decoration:none;">Fill the Collection Form →</a>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🙌</div>
+        <div class="card-en">Volunteer With Us</div>
+        <span class="card-mr">स्वयंसेवक व्हा</span>
+        <p class="card-desc">Join our growing team of 50+ volunteers. Help with collections, upcycling workshops, distribution drives, community outreach, or digital marketing — whatever your skills, we have a place for you.</p>
+        <br><a href="index.html#forms-section" style="color:var(--saffron);font-size:.85rem;font-weight:500;text-decoration:none;">Register as Volunteer →</a>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">💛</div>
+        <div class="card-en">Make a Donation</div>
+        <span class="card-mr">आर्थिक मदत करा</span>
+        <p class="card-desc">Support our operations financially. Your contribution funds collection drives, upcycling workshops, artisan wages, and distribution logistics — every rupee reaches a family in need.</p>
+        <br><a href="index.html#contact" style="color:var(--saffron);font-size:.85rem;font-weight:500;text-decoration:none;">Contact Us to Donate →</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="qband"><div class="qb-inner">
+  <p class="qb-mr">"एक पाऊल पुढे टाकणे म्हणजेच बदलाची सुरुवात."</p>
+  <p class="qb-en">"Taking one step forward is the beginning of change."</p>
+  <p class="qb-attr">— अमर स्वरूप फाउंडेशन · Nagpur</p>
+</div></div>
+<!-- VOLUNTEER ROLES -->
+<div class="sec-dark">
+  <div class="sec-inner">
+    <div class="clabel clabel-c clabel-w reveal" style="justify-content:center;">Volunteer Roles &nbsp;·&nbsp; स्वयंसेवक भूमिका</div>
+    <h2 class="ch ch-w reveal" style="text-align:center;">Find Your <em>Role</em></h2>
+    <span class="cmr cmr-w reveal" style="text-align:center;">तुमची भूमिका शोधा</span>
+    <div class="grid-3">
+      <div class="card-dark reveal"><div class="card-icon">🚗</div><div class="card-en card-en-w">Collection Driver</div><span class="card-mr card-mr-w">संकलन चालक</span><p class="card-desc card-desc-w">Drive our collection vehicle or your own transport to pick up donated waste from households across Nagpur. Weekends or weekday mornings welcome.</p></div>
+      <div class="card-dark reveal"><div class="card-icon">🔨</div><div class="card-en card-en-w">Upcycling Artisan</div><span class="card-mr card-mr-w">कारागीर स्वयंसेवक</span><p class="card-desc card-desc-w">Use your carpentry, tailoring, painting, or craft skills to help transform collected waste into useful, beautiful products at our workshop.</p></div>
+      <div class="card-dark reveal"><div class="card-icon">📣</div><div class="card-en card-en-w">Community Ambassador</div><span class="card-mr card-mr-w">समुदाय दूत</span><p class="card-desc card-desc-w">Spread awareness in your mohalla, society, or workplace. Organise collection drives, recruit donors, and bring more of Nagpur into this movement.</p></div>
+      <div class="card-dark reveal"><div class="card-icon">📱</div><div class="card-en card-en-w">Digital Volunteer</div><span class="card-mr card-mr-w">डिजिटल स्वयंसेवक</span><p class="card-desc card-desc-w">Help us grow online — manage social media, create content, photograph our work, or help with website updates. Remote-friendly role.</p></div>
+      <div class="card-dark reveal"><div class="card-icon">🎁</div><div class="card-en card-en-w">Distribution Helper</div><span class="card-mr card-mr-w">वितरण सहाय्यक</span><p class="card-desc card-desc-w">Join our distribution drives and help deliver upcycled products to families, shelters, and community centres across Nagpur with care and dignity.</p></div>
+      <div class="card-dark reveal"><div class="card-icon">📚</div><div class="card-en card-en-w">Skills Trainer</div><span class="card-mr card-mr-w">कौशल्य प्रशिक्षक</span><p class="card-desc card-desc-w">Teach upcycling skills — woodwork, stitching, painting, basic repair — to underprivileged youth and adults in our workshop programme.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT TO DONATE -->
+<div class="sec-parch">
+  <div class="sec-inner">
+    <div class="clabel reveal">What to Donate &nbsp;·&nbsp; काय दान करावे</div>
+    <h2 class="ch reveal">Your <em>Unwanted</em> Is Someone's <em>Needed</em></h2>
+    <span class="cmr reveal">तुमचे नको ते कोणाचे हवे ते</span>
+    <div class="grid-3">
+      <div class="card reveal"><div class="card-icon">🪑</div><div class="card-en">Furniture</div><span class="card-mr">फर्निचर</span><p class="card-desc">Chairs, tables, beds, shelves, almirahs — broken or old, we will repair and repurpose them.</p></div>
+      <div class="card reveal"><div class="card-icon">👕</div><div class="card-en">Clothing & Fabric</div><span class="card-mr">कपडे आणि कापड</span><p class="card-desc">Old clothes, bedsheets, curtains, fabric scraps — cleaned and converted into quilts, bags, and more.</p></div>
+      <div class="card reveal"><div class="card-icon">📺</div><div class="card-en">Electronics</div><span class="card-mr">इलेक्ट्रॉनिक्स</span><p class="card-desc">Old fans, lamps, radios, small appliances — many can be repaired and given a second life.</p></div>
+      <div class="card reveal"><div class="card-icon">🍳</div><div class="card-en">Utensils & Kitchenware</div><span class="card-mr">भांडी</span><p class="card-desc">Pots, pans, plates, cups, steel items — cleaned and distributed to families who need them.</p></div>
+      <div class="card reveal"><div class="card-icon">🧸</div><div class="card-en">Toys & Books</div><span class="card-mr">खेळणी आणि पुस्तके</span><p class="card-desc">Children's books, toys, and educational material — given to shelters, schools, and children in need.</p></div>
+      <div class="card reveal"><div class="card-icon">🔩</div><div class="card-en">Metal & Scrap</div><span class="card-mr">धातू आणि स्क्रॅप</span><p class="card-desc">Pipes, rods, wire, sheet metal — upcycled by our artisans into tools and useful hardware.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- CORPORATE / PARTNER -->
+<div class="sec">
+  <div class="two-col" style="max-width:1100px;margin:0 auto;">
+    <div class="reveal-l">
+      <div class="clabel">Partner With Us &nbsp;·&nbsp; आमच्यासोबत भागीदारी करा</div>
+      <h2 class="ch">Organisations & <em>Corporates</em></h2>
+      <span class="cmr">संस्था आणि कंपन्या</span>
+      <div class="prose">
+        <p>Is your organisation looking for a meaningful CSR initiative? Do you have bulk waste from an office renovation, warehouse clearance, or event? We can partner with you to ensure it reaches the families who need it most — with full transparency and impact reporting.</p>
+        <p>We have worked with housing societies, schools, businesses, and government offices across Nagpur. Let's build something meaningful together.</p>
+      </div>
+      <br><a href="index.html#contact" class="btn-g" style="display:inline-block;margin-top:.5rem;">Partner With Us →</a>
+    </div>
+    <div class="reveal-r">
+      <div class="green-box">
+        <p class="gb-mr">"एकट्याने चालणे म्हणजे वेग, पण एकत्र चालणे म्हणजे यश."</p>
+        <p class="gb-en">"Walking alone means speed, but walking together means success."<br><br>— नागपूर, महाराष्ट्र</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cta-wrap">
+  <span class="cta-rangoli">✦ ❋ ✦ ❋ ✦ ❋ ✦ ❋ ✦</span>
+  <h2 class="reveal">Ready to <em>Get Involved?</em></h2>
+  <span class="cta-mr reveal">सहभागी होण्यास तयार आहात?</span>
+  <p class="cta-desc reveal">Fill the form on our main website — volunteer registration or waste collection — and we will be in touch within 24 hours.</p>
+  <div class="cta-btns reveal">
+    <a href="index.html#forms-section" class="btn-s">Go to Registration Forms</a>
+    <a href="index.html" class="btn-o">← Main Website</a>
+  </div>
+  <span class="cta-rangoli" style="margin-top:2rem;">✦ ❋ ❋ ✦ ❋ ✦ ❋ ✦ ❋ ✦</span>
+</div>
+<footer class="pg-footer">
+  <div class="logo">Amar<span>Swaroop</span> Foundation</div>
+  <p class="fmr">नागपूर, महाराष्ट्र · सहभागी व्हा</p>
+  <p>© 2025 · Made with 💚 in Nagpur</p>
+</footer><script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e,i) => { if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'),i*90); });
+  },{threshold:0.1});
+  document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

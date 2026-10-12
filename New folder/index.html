@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Amar Swaroop Foundation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+  <style>
+    /* Fallback fonts if Google Fonts don't load */
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=Tiro+Devanagari+Marathi:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap');
+  </style>
+  <style>
+    :root {
+      --green: #2d6a4f;
+      --green-light: #52b788;
+      --earth: #b5793a;
+      --cream: #fdf8f0;
+      --dark: #1a1a1a;
+      --text: #3a3a3a;
+      --accent: #e9c46a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 5%;
+      background: rgba(253,248,240,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(45,106,79,0.1);
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+    .logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--green); letter-spacing: -0.5px; line-height: 1.1; }
+    .logo span { color: var(--earth); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: .88rem; font-weight: 500; color: var(--text); letter-spacing: .5px; transition: color .2s; }
+    .nav-links a:hover { color: var(--green); }
+    .nav-cta { background: var(--green); color: #fff !important; padding: .5rem 1.3rem; border-radius: 50px; transition: background .2s, transform .2s !important; }
+    .nav-cta:hover { background: var(--green-light) !important; transform: translateY(-1px); }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; padding: 8rem 5% 4rem; position: relative; overflow: hidden;
+    }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse at 70% 50%, rgba(82,183,136,0.12) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(181,121,58,0.08) 0%, transparent 50%); }
+    .hero-bg-circles { position: absolute; top: -100px; right: -100px; width: 600px; height: 600px; border-radius: 50%; border: 1px solid rgba(45,106,79,0.08); }
+    .hero-bg-circles::before, .hero-bg-circles::after { content: ''; position: absolute; border-radius: 50%; border: 1px solid rgba(45,106,79,0.06); }
+    .hero-bg-circles::before { inset: 60px; }
+    .hero-bg-circles::after { inset: 120px; }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-tag { display: inline-flex; align-items: center; gap: .5rem; background: rgba(45,106,79,0.1); color: var(--green); padding: .35rem 1rem; border-radius: 50px; font-size: .8rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; animation: fadeUp .8s ease both; }
+    .hero-tag::before { content: '♻'; font-size: 1rem; }
+    h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5vw, 4.5rem); line-height: 1.08; color: var(--dark); margin-bottom: 1.5rem; animation: fadeUp .8s .15s ease both; }
+    h1 em { color: var(--green); font-style: italic; }
+    .hero-desc { font-size: 1.05rem; line-height: 1.75; color: #666; max-width: 500px; margin-bottom: 2.5rem; animation: fadeUp .8s .3s ease both; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp .8s .45s ease both; }
+    .btn-primary { background: var(--green); color: #fff; padding: .85rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 500; transition: transform .2s, box-shadow .2s; box-shadow: 0 4px 20px rgba(45,106,79,0.3); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(45,106,79,0.4); }
+    .btn-secondary { background: transparent; color: var(--green); padding: .85rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 500; border: 2px solid var(--green); transition: background .2s, color .2s; }
+    .btn-secondary:hover { background: var(--green); color: #fff; }
+    .hero-visual { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; animation: fadeUp .8s .2s ease both; }
+    .hero-card { background: #fff; border-radius: 24px; padding: 2.5rem; box-shadow: 0 20px 60px rgba(0,0,0,0.1); position: relative; max-width: 420px; width: 100%; }
+    .hero-card-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+    .hero-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: .7rem; color: var(--dark); }
+    .hero-card p { font-size: .92rem; line-height: 1.7; color: #777; }
+    .flow-steps { display: flex; align-items: center; gap: .7rem; margin-top: 1.8rem; flex-wrap: wrap; }
+    .flow-step { background: var(--cream); border-radius: 12px; padding: .6rem 1rem; font-size: .8rem; font-weight: 500; color: var(--green); display: flex; align-items: center; gap: .4rem; }
+    .flow-arrow { color: var(--earth); font-weight: 700; }
+    .badge { position: absolute; background: #fff; border-radius: 16px; padding: .8rem 1.2rem; box-shadow: 0 8px 24px rgba(0,0,0,0.12); font-size: .82rem; font-weight: 500; display: flex; align-items: center; gap: .5rem; animation: float 4s ease-in-out infinite; }
+    .badge-1 { top: -20px; right: -30px; animation-delay: 0s; }
+    .badge-2 { bottom: -20px; left: -30px; animation-delay: 2s; }
+    .badge-num { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--green); }
+
+    /* ─── STATS ─── */
+    #stats { background: var(--green); padding: 4rem 5%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+    .stat { text-align: center; color: #fff; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 900; line-height: 1; color: var(--accent); margin-bottom: .4rem; }
+    .stat-label { font-size: .88rem; opacity: .85; letter-spacing: .5px; }
+
+    /* ─── MISSION ─── */
+    #mission { padding: 7rem 5%; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .section-tag { font-size: .78rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--earth); margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem; }
+    .section-tag::before { content: ''; width: 30px; height: 2px; background: var(--earth); }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.15; color: var(--dark); margin-bottom: 1.5rem; }
+    h2 em { color: var(--green); font-style: italic; }
+    .mission-text p { line-height: 1.8; color: #666; margin-bottom: 1rem; font-size: .98rem; }
+    .process-steps { display: flex; flex-direction: column; gap: 1.5rem; }
+    .process-step { display: flex; gap: 1.5rem; align-items: flex-start; padding: 1.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: transform .2s, box-shadow .2s; }
+    .process-step:hover { transform: translateX(6px); box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
+    .step-icon { font-size: 2rem; width: 56px; height: 56px; min-width: 56px; background: var(--cream); border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+    .step-body h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin-bottom: .35rem; color: var(--dark); }
+    .step-body p { font-size: .88rem; line-height: 1.6; color: #888; }
+
+    /* ─── IMPACT ─── */
+    #impact { background: var(--dark); padding: 7rem 5%; text-align: center; }
+    #impact .section-tag { justify-content: center; color: var(--accent); }
+    #impact .section-tag::before { background: var(--accent); }
+    #impact h2 { color: #fff; }
+    #impact h2 em { color: var(--green-light); }
+    .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+    .impact-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 2rem; text-align: left; transition: background .3s, transform .2s; }
+    .impact-card:hover { background: rgba(255,255,255,0.09); transform: translateY(-4px); }
+    .impact-card-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .impact-card h3 { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.2rem; margin-bottom: .7rem; }
+    .impact-card p { color: rgba(255,255,255,0.55); font-size: .88rem; line-height: 1.7; }
+
+    /* ─── GET INVOLVED ─── */
+    #involved { padding: 7rem 5%; }
+    #involved .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .involved-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .involved-card { border: 2px solid rgba(45,106,79,0.12); border-radius: 20px; padding: 2.5rem; text-align: center; transition: border-color .3s, transform .2s, box-shadow .3s; position: relative; overflow: hidden; }
+    .involved-card::before { content: ''; position: absolute; inset: 0; background: var(--green); transform: scaleY(0); transform-origin: bottom; transition: transform .4s cubic-bezier(.4,0,.2,1); z-index: 0; }
+    .involved-card:hover::before { transform: scaleY(1); }
+    .involved-card:hover { border-color: var(--green); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(45,106,79,0.25); }
+    .involved-card:hover * { color: #fff !important; }
+    .involved-card > * { position: relative; z-index: 1; transition: color .3s; }
+    .involved-card-icon { font-size: 3rem; margin-bottom: 1.2rem; display: block; }
+    .involved-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: .7rem; color: var(--dark); }
+    .involved-card p { font-size: .88rem; line-height: 1.7; color: #777; margin-bottom: 1.5rem; }
+    .involved-link { font-size: .85rem; font-weight: 500; color: var(--green); text-decoration: none; letter-spacing: .5px; }
+
+    /* ─── FORMS SECTION ─── */
+    #forms-section { padding: 7rem 5%; background: #f0ece2; }
+    #forms-section .section-header { text-align: center; margin-bottom: 3rem; }
+    .forms-tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; }
+    .tab-btn { padding: .75rem 2rem; border-radius: 50px; border: 2px solid var(--green); font-family: 'DM Sans', sans-serif; font-size: .92rem; font-weight: 500; cursor: pointer; transition: all .25s; background: transparent; color: var(--green); }
+    .tab-btn.active { background: var(--green); color: #fff; box-shadow: 0 4px 20px rgba(45,106,79,0.3); }
+    .tab-btn:hover:not(.active) { background: rgba(45,106,79,0.08); }
+    .form-panel { display: none; }
+    .form-panel.active { display: block; }
+    .form-wrapper { max-width: 820px; margin: 0 auto; background: #fff; border-radius: 24px; padding: 3rem; box-shadow: 0 12px 50px rgba(0,0,0,0.08); }
+    .form-wrapper h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--dark); margin-bottom: .5rem; }
+    .form-subtitle { color: #888; font-size: .92rem; margin-bottom: 1.5rem; line-height: 1.6; }
+    .setup-notice { background: rgba(233,196,106,0.2); border: 1px solid var(--accent); border-radius: 12px; padding: 1rem 1.2rem; font-size: .82rem; color: #7a5c00; margin-bottom: 2rem; line-height: 1.6; }
+    .setup-notice strong { color: #5a4000; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: .4rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label { font-size: .78rem; font-weight: 500; color: #555; letter-spacing: 1px; text-transform: uppercase; }
+    .form-group input, .form-group textarea, .form-group select { padding: .85rem 1.1rem; border: 2px solid rgba(0,0,0,0.08); border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: .9rem; color: var(--dark); background: #fafafa; transition: border-color .2s, background .2s; outline: none; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--green); background: #fff; }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .checkbox-group { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: .3rem; }
+    .checkbox-item { display: flex; align-items: center; gap: .5rem; }
+    .checkbox-item input[type="checkbox"] { accent-color: var(--green); width: 16px; height: 16px; cursor: pointer; }
+    .checkbox-item label { font-size: .88rem; color: var(--text); cursor: pointer; text-transform: none; letter-spacing: 0; font-weight: 400; }
+    .btn-submit { background: var(--green); color: #fff; border: none; padding: 1rem 2.5rem; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: .95rem; font-weight: 500; cursor: pointer; transition: transform .2s, box-shadow .2s; box-shadow: 0 4px 20px rgba(45,106,79,0.3); margin-top: 1.2rem; }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(45,106,79,0.4); }
+    .btn-submit:disabled { opacity: .7; cursor: not-allowed; transform: none; }
+    .form-success { display: none; text-align: center; padding: 2.5rem; background: rgba(45,106,79,0.06); border-radius: 16px; margin-top: 1.5rem; }
+    .form-success.show { display: block; }
+    .form-success .success-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+    .form-success h4 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--green); margin-bottom: .5rem; }
+    .form-success p { font-size: .9rem; color: #666; line-height: 1.7; }
+
+    /* ─── CONTACT ─── */
+    #contact { padding: 7rem 5%; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .contact-info h2 { margin-bottom: 1rem; }
+    .contact-info p { color: #666; line-height: 1.8; margin-bottom: 2rem; }
+    .contact-details { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.2rem; background: #fff; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .contact-item-icon { font-size: 1.3rem; }
+    .contact-item-text { font-size: .9rem; color: #555; }
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .contact-form .form-group label { font-size: .82rem; font-weight: 500; color: #555; letter-spacing: .5px; }
+    .contact-form .form-group input, .contact-form .form-group textarea, .contact-form .form-group select { padding: .85rem 1.1rem; border: 2px solid rgba(0,0,0,0.08); border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: .9rem; color: var(--dark); background: #fff; transition: border-color .2s; outline: none; }
+    .contact-form .form-group input:focus, .contact-form .form-group textarea:focus { border-color: var(--green); }
+    .contact-form .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* ─── FOOTER ─── */
+    footer { background: var(--dark); padding: 3rem 5% 2rem; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; }
+    .footer-brand .logo { font-size: 1.3rem; }
+    .footer-brand p { color: rgba(255,255,255,0.45); font-size: .85rem; line-height: 1.7; margin-top: .8rem; max-width: 280px; }
+    .footer-links h4 { color: #fff; font-size: .85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.2rem; }
+    .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    .footer-links a { color: rgba(255,255,255,0.45); font-size: .85rem; text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--green-light); }
+    .footer-bottom { background: var(--dark); text-align: center; padding: 1.2rem 5%; border-top: 1px solid rgba(255,255,255,0.07); color: rgba(255,255,255,0.3); font-size: .8rem; }
+
+    /* ─── ANIMATIONS ─── */
+
+    .marathi { font-family: "Tiro Devanagari Marathi", serif; }
+    .marathi-sub { font-family: "Tiro Devanagari Marathi", serif; font-size: .82rem; color: #888; display: block; margin-top: .2rem; letter-spacing: 0; text-transform: none; font-weight: 400; }
+    .rangoli-divider { text-align: center; padding: 1.5rem 0; font-size: 1.4rem; color: var(--earth); letter-spacing: .6rem; opacity: .55; user-select: none; }
+    #marathi-quote { background: var(--green); padding: 3rem 5%; text-align: center; }
+    .quote-marathi { font-family: "Tiro Devanagari Marathi", serif; font-size: clamp(1.4rem, 3vw, 2.2rem); color: var(--accent); line-height: 1.6; margin-bottom: .6rem; }
+    .quote-translation { font-size: .92rem; color: rgba(255,255,255,0.65); font-style: italic; margin-bottom: .4rem; }
+    .quote-location { font-size: .78rem; color: rgba(255,255,255,0.4); letter-spacing: 2px; text-transform: uppercase; }
+    .nagpur-tag { display: inline-flex; align-items: center; gap: .4rem; font-size: .78rem; color: var(--earth); font-weight: 500; margin-bottom: .8rem; letter-spacing: .5px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+
+    /* ─── OUR STORY SECTION ─── */
+    #our-story { padding: 0; background: var(--cream); }
+
+    /* Story Hero */
+    .story-hero-inner {
+      min-height: 90vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 8rem 5% 5rem; text-align: center;
+      position: relative; overflow: hidden;
+      background:
+        radial-gradient(ellipse at 15% 20%, rgba(181,121,58,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 80%, rgba(45,106,79,0.08) 0%, transparent 50%);
+    }
+    .story-hero-inner .rangoli-bg-s {
+      position: absolute; border-radius: 50%;
+      border: 1px solid rgba(181,121,58,0.07); pointer-events: none;
+    }
+    .story-hero-inner .rangoli-bg-s:nth-child(1) { width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-50%); }
+    .story-hero-inner .rangoli-bg-s:nth-child(2) { width:500px;height:500px;top:50%;left:50%;transform:translate(-50%,-50%); }
+    .story-hero-inner .rangoli-bg-s:nth-child(3) { width:300px;height:300px;top:50%;left:50%;transform:translate(-50%,-50%); }
+    .story-eyebrow-tag {
+      font-family: 'Tiro Devanagari Marathi', serif;
+      font-size: 1rem; color: var(--earth); opacity:.8;
+      margin-bottom: 1rem;
+    }
+    .story-divider-line { display:flex; align-items:center; gap:1rem; justify-content:center; margin-bottom:1.5rem; }
+    .story-divider-line span { width:60px; height:1px; background:var(--accent); }
+    .story-divider-line i { color:var(--accent); font-style:normal; font-size:1.1rem; }
+    h2.story-main-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 300; line-height: 1.0; color: var(--dark);
+      letter-spacing: -1px; margin-bottom: .5rem;
+    }
+    h2.story-main-title em { font-style: italic; color: var(--earth); }
+    .story-marathi-title {
+      font-family: 'Tiro Devanagari Marathi', serif;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      color: var(--green); display: block; margin-bottom: 1.5rem;
+    }
+    .story-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(.95rem, 2vw, 1.15rem);
+      color: #7a5a38; line-height: 1.8; max-width: 580px;
+      font-style: italic; margin: 0 auto;
+    }
+
+    /* City strip */
+    .city-strip {
+      background: var(--green); padding: .85rem 5%;
+      display: flex; align-items: center; justify-content: center;
+      gap: 2.5rem; flex-wrap: wrap;
+    }
+    .city-pill { display:flex; align-items:center; gap:.5rem; color:rgba(255,255,255,.7); font-size:.82rem; letter-spacing:.5px; }
+    .city-pill strong { color:#fff; }
+    .city-pill .mr { font-family:'Tiro Devanagari Marathi',serif; font-size:.9rem; }
+
+    /* Story chapters */
+    .story-chapter { padding: 5rem 5%; max-width: 1200px; margin: 0 auto; }
+    .chapter-label-s {
+      font-size:.72rem; font-weight:500; letter-spacing:3px; text-transform:uppercase;
+      color: var(--earth); display:flex; align-items:center; gap:.8rem; margin-bottom:1.2rem;
+    }
+    .chapter-label-s::before, .chapter-label-s::after { content:''; flex:0 0 30px; height:1px; background:var(--earth); opacity:.5; }
+    h3.chapter-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 400; color: var(--dark); line-height:1.15; margin-bottom:.4rem;
+    }
+    h3.chapter-heading em { font-style:italic; color:var(--earth); }
+    .chapter-marathi { font-family:'Tiro Devanagari Marathi',serif; font-size:1rem; color:var(--green); opacity:.7; margin-bottom:1.8rem; display:block; }
+    .story-prose { font-size:1.02rem; line-height:1.9; color:#5a3e22; }
+    .story-prose p { margin-bottom:1.3rem; }
+    .story-prose p:last-child { margin-bottom:0; }
+
+    /* Founder grid */
+    .founder-grid-s { display:grid; grid-template-columns:1fr 1.6fr; gap:4rem; align-items:center; }
+    .portrait-box {
+      aspect-ratio:3/4; border-radius: 4px 70px 4px 70px;
+      background: linear-gradient(135deg, #f4a14a, #c9922a, #d4660a);
+      display:flex; align-items:center; justify-content:center;
+      font-size:6rem; position:relative;
+      box-shadow: 16px 16px 0 rgba(45,106,79,.15);
+    }
+    .founder-name-card {
+      position:absolute; bottom:-18px; right:-18px;
+      background:var(--green); color:#fff;
+      padding:.9rem 1.3rem; border-radius:12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.2);
+    }
+    .founder-name-card h4 { font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:600; }
+    .founder-name-card .fn-mr { font-family:'Tiro Devanagari Marathi',serif; font-size:.9rem; opacity:.75; display:block; margin-top:.1rem; }
+    .founder-name-card p { font-size:.72rem; opacity:.6; margin-top:.2rem; }
+    .founder-pull-quote {
+      font-family:'Cormorant Garamond',serif; font-size:1.35rem; font-style:italic;
+      color:var(--earth); border-left:3px solid var(--earth);
+      padding-left:1.4rem; margin:1.8rem 0; line-height:1.65;
+    }
+    .founder-pull-quote small { font-size:.82rem; color:#a07050; font-style:normal; display:block; margin-top:.4rem; }
+
+    /* Saffron quote band */
+    .saffron-band {
+      background: var(--earth); padding:3rem 5%; text-align:center; position:relative; overflow:hidden;
+    }
+    .saffron-band::before { content:'✦ ❋ ✦ ❋ ✦ ❋ ✦'; position:absolute; top:.8rem; left:0; right:0; text-align:center; font-size:.9rem; color:rgba(255,255,255,.15); letter-spacing:1rem; }
+    .saffron-band::after  { content:'✦ ❋ ✦ ❋ ✦ ❋ ✦'; position:absolute; bottom:.8rem; left:0; right:0; text-align:center; font-size:.9rem; color:rgba(255,255,255,.15); letter-spacing:1rem; }
+    .sband-marathi { font-family:'Tiro Devanagari Marathi',serif; font-size:clamp(1.3rem,3vw,2.1rem); color:#fff; line-height:1.65; margin-bottom:.6rem; }
+    .sband-en { font-family:'Cormorant Garamond',serif; font-size:1rem; font-style:italic; color:rgba(255,255,255,.65); margin-bottom:.4rem; }
+    .sband-attr { font-size:.75rem; color:rgba(255,255,255,.4); letter-spacing:2px; text-transform:uppercase; }
+
+    /* Timeline */
+    .story-timeline-wrap { background:#1c1208; padding:5rem 5%; }
+    .story-timeline-inner { max-width:860px; margin:0 auto; }
+    .stl-header { text-align:center; margin-bottom:3.5rem; }
+    .stl-header .chapter-label-s { justify-content:center; color:#f4a14a; }
+    .stl-header .chapter-label-s::before,.stl-header .chapter-label-s::after { background:#f4a14a; }
+    .stl-header h3 { color:#fff; }
+    .stl-header h3 em { color:#f4a14a; }
+    .stl-header .chapter-marathi { color:rgba(255,255,255,.35); }
+    .stl { position:relative; }
+    .stl::before { content:''; position:absolute; left:50%; top:0; bottom:0; width:1px; background:linear-gradient(to bottom,transparent,#c9922a,#d4660a,#c9922a,transparent); transform:translateX(-50%); }
+    .stl-item { display:grid; grid-template-columns:1fr 52px 1fr; margin-bottom:2.8rem; align-items:start; }
+    .stl-item:nth-child(odd)  .stl-body { grid-column:1; text-align:right; padding-right:2rem; }
+    .stl-item:nth-child(odd)  .stl-blank { grid-column:3; }
+    .stl-item:nth-child(even) .stl-body { grid-column:3; text-align:left; padding-left:2rem; }
+    .stl-item:nth-child(even) .stl-blank { grid-column:1; }
+    .stl-dot { grid-column:2; display:flex; align-items:flex-start; justify-content:center; padding-top:.2rem; position:relative; z-index:1; }
+    .stl-dot-i { width:40px;height:40px;border-radius:50%;background:var(--earth);display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 0 0 6px rgba(212,102,10,.2); }
+    .stl-year { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:700; color:#f4a14a; line-height:1; margin-bottom:.3rem; }
+    .stl-title { font-family:'Cormorant Garamond',serif; font-size:1.15rem; color:#fff; margin-bottom:.25rem; }
+    .stl-mr { font-family:'Tiro Devanagari Marathi',serif; font-size:.8rem; color:rgba(255,255,255,.3); display:block; margin-bottom:.4rem; }
+    .stl-desc { font-size:.85rem; color:rgba(255,255,255,.45); line-height:1.7; }
+
+    /* Values */
+    .story-values-wrap { padding:5rem 5%; background:var(--cream); }
+    .story-values-inner { max-width:1200px; margin:0 auto; }
+    .sv-header { text-align:center; margin-bottom:3rem; }
+    .sv-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem; }
+    .sv-card {
+      padding:2rem 1.8rem; border:1px solid rgba(181,121,58,.15);
+      border-radius: 2px 20px 2px 20px; background:#fff;
+      transition:transform .3s,box-shadow .3s; position:relative; overflow:hidden;
+    }
+    .sv-card::after { content:''; position:absolute; bottom:0;left:0;right:0;height:3px; background:linear-gradient(to right,var(--earth),var(--accent)); transform:scaleX(0); transform-origin:left; transition:transform .4s; }
+    .sv-card:hover::after { transform:scaleX(1); }
+    .sv-card:hover { transform:translateY(-5px); box-shadow:0 18px 45px rgba(181,121,58,.12); }
+    .sv-icon { font-size:2.2rem; margin-bottom:.9rem; }
+    .sv-en { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:600; color:var(--dark); margin-bottom:.2rem; }
+    .sv-mr { font-family:'Tiro Devanagari Marathi',serif; font-size:.9rem; color:var(--earth); display:block; margin-bottom:.6rem; }
+    .sv-desc { font-size:.86rem; line-height:1.7; color:#7a5a38; }
+
+    /* Vision */
+    .story-vision-wrap { padding:5rem 5%; background:#f5ede0; }
+    .story-vision-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1.2fr 1fr; gap:4rem; align-items:center; }
+    .vision-promise-box {
+      background:var(--green); border-radius:4px 40px 4px 40px;
+      padding:2.5rem; text-align:center;
+    }
+    .vp-marathi { font-family:'Tiro Devanagari Marathi',serif; font-size:1.4rem; color:#f4a14a; line-height:1.65; margin-bottom:.9rem; }
+    .vp-en { font-family:'Cormorant Garamond',serif; font-size:.95rem; font-style:italic; color:rgba(255,255,255,.6); line-height:1.7; }
+    .vision-dots-s { display:flex; flex-direction:column; gap:1.1rem; margin-top:1.8rem; }
+    .vd-item { display:flex; gap:.9rem; align-items:flex-start; }
+    .vd-icon { width:34px;height:34px;min-width:34px;background:rgba(181,121,58,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem; }
+    .vd-body h4 { font-family:'Cormorant Garamond',serif; font-size:1.05rem; color:var(--dark); margin-bottom:.15rem; }
+    .vd-body p { font-size:.84rem; color:#7a5a38; line-height:1.6; }
+
+    /* Story mobile */
+    @media(max-width:768px) {
+      .founder-grid-s { grid-template-columns:1fr; gap:3rem; }
+      .story-vision-inner { grid-template-columns:1fr; gap:3rem; }
+      .sv-grid { grid-template-columns:1fr; }
+      .stl::before { left:20px; }
+      .stl-item { grid-template-columns:40px 1fr; }
+      .stl-item:nth-child(odd) .stl-body,.stl-item:nth-child(even) .stl-body { grid-column:2; text-align:left; padding-right:0; padding-left:1.2rem; }
+      .stl-item:nth-child(odd) .stl-blank,.stl-item:nth-child(even) .stl-blank { display:none; }
+      .stl-dot { grid-column:1; }
+    }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; padding-top: 7rem; }
+      .hero-visual { display: none; }
+      #stats { grid-template-columns: repeat(2, 1fr); }
+      #mission { grid-template-columns: 1fr; gap: 3rem; }
+      .impact-grid, .involved-grid { grid-template-columns: 1fr; }
+      #contact { grid-template-columns: 1fr; gap: 3rem; }
+      footer { grid-template-columns: 1fr; gap: 2rem; }
+      .nav-links { display: none; }
+      .form-row, .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: auto; }
+      .form-wrapper { padding: 1.8rem; }
+      .forms-tabs { flex-direction: column; align-items: center; }
+    }
+  </style>
+
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="logo">Amar<span>Swaroop</span><br>Foundation</div>
+  <ul class="nav-links">
+    <li><a href="our-story.html" target="_blank">Our Story</a></li>
+    <li><a href="events-calendar.html" target="_blank">📅 Events</a></li>
+    <li><a href="our-mission.html" target="_blank">Our Mission</a></li>
+    <li><a href="our-impact.html" target="_blank">Impact</a></li>
+    <li><a href="get-involved.html" target="_blank">Get Involved</a></li>
+    <li><a href="#forms-section">📋 Forms</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>
+
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-bg-circles"></div>
+  <div class="hero-content">
+    <div class="nagpur-tag">नागपूर, महाराष्ट्र</div>
+    <div class="hero-tag">कचऱ्यातून आशा — Transforming Waste into Hope</div>
+    <h1>Turning<br><em>Waste</em> into<br>Worthy Lives</h1>
+    <p style="font-family:'Tiro Devanagari Marathi',serif;font-size:1.1rem;color:var(--green);margin-bottom:.5rem;animation:fadeUp .8s .25s ease both;">कचऱ्यातून घडतो सन्मान, सन्मानातून घडतो समाज</p>
+    <p class="hero-desc">We go door to door collecting waste, transform it into valuable products, and give them to those who need it most. Every piece of waste is a second chance.</p>
+    <p style="font-family:'Tiro Devanagari Marathi',serif;font-size:.88rem;color:#999;font-style:italic;margin-top:-.5rem;margin-bottom:1.5rem;animation:fadeUp .8s .35s ease both;">नागपूर, महाराष्ट्र · २०१७ पासून</p>
+    <div class="hero-btns">
+      <a href="#forms-section" class="btn-primary">Donate Waste / Volunteer</a>
+      <a href="#mission" class="btn-secondary">Learn More</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="badge badge-1"><span class="badge-num">500+</span><span>Families Helped</span></div>
+    <div class="hero-card">
+      <div class="hero-card-icon">♻️</div>
+      <h3>Our Simple Promise</h3>
+      <p>We believe nothing should go to waste — not materials, not potential, not people. We close the loop from your door to someone's heart.</p>
+      <div class="flow-steps">
+        <div class="flow-step">🚪 Collect<br><span style="font-family:'Tiro Devanagari Marathi',serif;font-size:.7rem;color:#888;">संकलन</span></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">🛠️ Create<br><span style="font-family:'Tiro Devanagari Marathi',serif;font-size:.7rem;color:#888;">निर्मिती</span></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">🎁 Give<br><span style="font-family:'Tiro Devanagari Marathi',serif;font-size:.7rem;color:#888;">दान</span></div>
+      </div>
+    </div>
+    <div class="badge badge-2"><span class="badge-num">10k+</span><span>kg Waste Recycled</span></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stat reveal"><div class="stat-num">500+</div><div class="stat-label">Families Helped<span class="marathi-sub" style="color:rgba(255,255,255,0.6)">कुटुंबांना मदत</span></div></div>
+  <div class="stat reveal"><div class="stat-num">10K+</div><div class="stat-label">KG Waste Collected<span class="marathi-sub" style="color:rgba(255,255,255,0.6)">किलो कचरा गोळा</span></div></div>
+  <div class="stat reveal"><div class="stat-num">1200+</div><div class="stat-label">Products Created<span class="marathi-sub" style="color:rgba(255,255,255,0.6)">उत्पादने तयार</span></div></div>
+  <div class="stat reveal"><div class="stat-num">50+</div><div class="stat-label">Volunteers<span class="marathi-sub" style="color:rgba(255,255,255,0.6)">स्वयंसेवक</span></div></div>
+</section>
+
+
+
+
+<!-- MARATHI PROVERB BANNER -->
+<div style="background:var(--earth);padding:1.2rem 5%;display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap;">
+  <span style="font-family:'Tiro Devanagari Marathi',serif;font-size:1.05rem;color:#fff;opacity:.9;">🌿 नागपूर, महाराष्ट्र &nbsp;·&nbsp; २०१७ पासून &nbsp;·&nbsp; ♻️ कचऱ्यातून जीवन &nbsp;·&nbsp; 🙌 स्वयंसेवक &nbsp;·&nbsp; 💚 सेवा हाच धर्म</span>
+</div>
+
+<!-- MARATHI QUOTE -->
+<section id="marathi-quote">
+  <div class="rangoli-divider">✦ ❋ ✦ ❋ ✦</div>
+  <p class="quote-marathi">"एक माणूस दुसऱ्यासाठी जगतो, तेव्हाच जीवन सुंदर होते."</p>
+  <p class="quote-translation">"Life becomes beautiful only when one person lives for another."</p>
+  <p class="quote-location">📍 नागपूर, महाराष्ट्र · Serving the Orange City with Love</p>
+  <div class="rangoli-divider">✦ ❋ ✦ ❋ ✦</div>
+</section>
+
+<!-- MISSION -->
+<section id="mission">
+  <div class="mission-text reveal">
+    <div class="section-tag">Who We Are &nbsp;·&nbsp; <span class="marathi">आम्ही कोण आहोत</span></div>
+    <h2>A Circle of <em>Care</em> & Purpose</h2>
+    <p style="font-family:'Tiro Devanagari Marathi',serif;font-size:.9rem;color:var(--green);opacity:.75;margin-top:-.8rem;margin-bottom:1rem;">काळजी आणि उद्देशाचे वर्तुळ</p>
+    <p>We go door to door collecting discarded materials, upcycle them into useful products, and give them free of cost to families in need. Nothing wasted — not materials, not potential, not people.</p>
+    <a href="our-mission.html" target="_blank" class="btn-primary" style="display:inline-block;margin-top:1.5rem;text-decoration:none;">Explore Our Mission →</a>
+  </div>
+  <div class="mission-visual reveal">
+    <div class="process-steps">
+      <div class="process-step"><div class="step-icon">🚪</div><div class="step-body"><h4>Door-to-Door Collection <span style="font-family:'Tiro Devanagari Marathi',serif;font-size:.78rem;color:var(--earth);font-weight:400;display:block;margin-top:.1rem;">घरोघरी संकलन</span></h4><p>Volunteers collect discarded materials from homes across Nagpur.</p></div></div>
+      <div class="process-step"><div class="step-icon">🛠️</div><div class="step-body"><h4>Upcycling & Creation <span style="font-family:'Tiro Devanagari Marathi',serif;font-size:.78rem;color:var(--earth);font-weight:400;display:block;margin-top:.1rem;">पुनर्निर्मिती</span></h4><p>Skilled artisans transform waste into beautiful, useful products.</p></div></div>
+      <div class="process-step"><div class="step-icon">🎁</div><div class="step-body"><h4>Distribution to the Needy <span style="font-family:'Tiro Devanagari Marathi',serif;font-size:.78rem;color:var(--earth);font-weight:400;display:block;margin-top:.1rem;">गरजूंना वितरण</span></h4><p>Products given free of cost to underprivileged families and shelters.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact">
+  <div class="section-tag reveal">Our Impact &nbsp;·&nbsp; <span class="marathi">आमचा प्रभाव</span></div>
+  <h2 class="reveal">Every Action <em>Counts</em></h2>
+  <p class="reveal" style="font-family:'Tiro Devanagari Marathi',serif;font-size:.9rem;color:rgba(255,255,255,.4);margin-top:-.8rem;margin-bottom:1rem;">प्रत्येक कृती महत्त्वाची</p>
+  <div class="impact-grid">
+    <div class="impact-card reveal"><div class="impact-card-icon">🌍</div><h3>Environmental Change <span style="font-family:'Tiro Devanagari Marathi',serif;font-size:.78rem;color:rgba(255,255,255,.35);font-weight:400;display:block;margin-top:.15rem;">पर्यावरणीय बदल</span></h3><p>Over 10,000 kg of waste diverted from Nagpur's landfills — reducing pollution and building a cleaner city.</p></div>
+    <div class="impact-card reveal"><div class="impact-card-icon">🏠</div><h3>Homes Transformed <span style="font-family:'Tiro Devanagari Marathi',serif;font-size:.78rem;color:rgba(255,255,255,.35);font-weight:400;display:block;margin-top:.15rem;">घरे बदलली</span></h3><p>500+ families across Nagpur now have furniture, utensils and essentials they could never afford.</p></div>
+    <div class="impact-card reveal"><div class="impact-card-icon">💼</div><h3>Livelihoods Created <span style="font-family:'Tiro Devanagari Marathi',serif;font-size:.78rem;color:rgba(255,255,255,.35);font-weight:400;display:block;margin-top:.15rem;">उपजीविका निर्माण</span></h3><p>Upcycling workshops provide skills and income to artisans and underprivileged individuals.</p></div>
+  </div>
+  <div style="text-align:center;margin-top:2.5rem;">
+    <a href="our-impact.html" target="_blank" class="btn-primary" style="display:inline-block;text-decoration:none;">See Full Impact →</a>
+  </div>
+</section>
+
+<!-- GET INVOLVED -->
+<section id="involved">
+  <div class="section-header reveal">
+    <div class="section-tag" style="justify-content:center;">Take Action &nbsp;·&nbsp; <span class="marathi">पुढाकार घ्या</span></div>
+    <h2>How You Can <em>Help</em></h2>
+  <p style="font-family:'Tiro Devanagari Marathi',serif;font-size:.9rem;color:var(--earth);opacity:.8;margin-top:-.5rem;margin-bottom:0;">तुम्ही कसे मदत करू शकता</p>
+  </div>
+  <div class="involved-grid">
+    <div class="involved-card reveal">
+      <span class="involved-card-icon">♻️</span>
+      <h3>Donate Your Waste <span style="font-family:'Tiro Devanagari Marathi',serif;font-size:.78rem;display:block;margin-top:.1rem;font-weight:400;">कचरा दान करा</span></h3>
+      <p>Schedule a free pickup of your unwanted items. Your clutter is someone's treasure.</p>
+      <a href="#forms-section" class="involved-link">Schedule Pickup →</a>
+    </div>
+    <div class="involved-card reveal">
+      <span class="involved-card-icon">🙌</span>
+      <h3>Volunteer With Us <span style="font-family:'Tiro Devanagari Marathi',serif;font-size:.78rem;display:block;margin-top:.1rem;font-weight:400;">स्वयंसेवक व्हा</span></h3>
+      <p>Join 50+ volunteers helping with collections, workshops and distribution drives.</p>
+      <a href="#forms-section" class="involved-link">Become a Volunteer →</a>
+    </div>
+    <div class="involved-card reveal">
+      <span class="involved-card-icon">💛</span>
+      <h3>Learn More <span style="font-family:'Tiro Devanagari Marathi',serif;font-size:.78rem;display:block;margin-top:.1rem;font-weight:400;">अधिक जाणून घ्या</span></h3>
+      <p>Explore all the ways you can get involved — donate waste, volunteer, partner, or donate funds.</p>
+      <a href="get-involved.html" target="_blank" class="involved-link">Get Involved →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FORMS SECTION
+═══════════════════════════════════════════════ -->
+<section id="forms-section">
+  <div class="section-header reveal">
+    <div class="section-tag" style="justify-content:center;">Join the Movement &nbsp;·&nbsp; <span class="marathi">सामील व्हा</span></div>
+    <h2>Register <em>With Us</em></h2>
+  <p class="reveal" style="font-family:'Tiro Devanagari Marathi',serif;font-size:.9rem;color:var(--earth);text-align:center;margin-top:-.8rem;">आमच्यासोबत नोंदणी करा</p>
+  </div>
+
+  <div class="forms-tabs reveal">
+    <button class="tab-btn active" onclick="switchTab('volunteer', this)">🙌 Volunteer Registration</button>
+    <button class="tab-btn" onclick="switchTab('donor', this)">♻️ Waste Collection Form</button>
+  </div>
+
+  <!-- ── VOLUNTEER FORM ── -->
+  <div class="form-panel active" id="panel-volunteer">
+    <div class="form-wrapper reveal">
+      <h3>🙌 Volunteer Registration</h3>
+      <p class="form-subtitle">Join our family of change-makers. Fill in your details and we'll get in touch with you about upcoming volunteering opportunities.</p>
+      
+      <form id="volunteerForm" onsubmit="submitForm(event, 'volunteer')">
+        <div class="form-grid">
+          <div class="form-group"><label>First Name *</label><input type="text" name="firstName" placeholder="Rahul" required /></div>
+          <div class="form-group"><label>Last Name *</label><input type="text" name="lastName" placeholder="Sharma" required /></div>
+          <div class="form-group"><label>Age *</label><input type="number" name="age" placeholder="25" min="16" max="80" required /></div>
+          <div class="form-group"><label>Gender</label>
+            <select name="gender">
+              <option value="">Select</option>
+              <option>Male</option><option>Female</option>
+              <option>Non-binary</option><option>Prefer not to say</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Phone Number *</label><input type="tel" name="phone" placeholder="+91 98765 43210" required /></div>
+          <div class="form-group"><label>Email Address *</label><input type="email" name="email" placeholder="rahul@email.com" required /></div>
+          <div class="form-group full"><label>Address / Locality *</label><input type="text" name="address" placeholder="Street, Area" required /></div>
+          <div class="form-group"><label>City *</label><input type="text" name="city" placeholder="Nagpur" required /></div>
+          <div class="form-group"><label>State *</label><input type="text" name="state" placeholder="Maharashtra" required /></div>
+          <div class="form-group full">
+            <label>Skills / Expertise</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item"><input type="checkbox" name="skills" id="s1" value="Carpentry"><label for="s1">🔨 Carpentry</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="skills" id="s2" value="Sewing/Tailoring"><label for="s2">🧵 Sewing / Tailoring</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="skills" id="s3" value="Painting/Art"><label for="s3">🎨 Painting / Art</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="skills" id="s4" value="Driving/Logistics"><label for="s4">🚗 Driving / Logistics</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="skills" id="s5" value="Community Outreach"><label for="s5">📣 Community Outreach</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="skills" id="s6" value="Social Media"><label for="s6">📱 Social Media</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="skills" id="s7" value="Teaching/Training"><label for="s7">📚 Teaching</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="skills" id="s8" value="General Labour"><label for="s8">💪 General Labour</label></div>
+            </div>
+          </div>
+          <div class="form-group full">
+            <label>Availability</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item"><input type="checkbox" name="availability" id="a1" value="Weekday Mornings"><label for="a1">Weekday Mornings</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="availability" id="a2" value="Weekday Evenings"><label for="a2">Weekday Evenings</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="availability" id="a3" value="Weekends"><label for="a3">Weekends</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="availability" id="a4" value="Full-time"><label for="a4">Full-time</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="availability" id="a5" value="Flexible"><label for="a5">Flexible</label></div>
+            </div>
+          </div>
+          <div class="form-group full"><label>Hours Available Per Week</label>
+            <select name="hoursPerWeek">
+              <option value="">Select</option>
+              <option>1–3 hours</option><option>4–8 hours</option>
+              <option>8–16 hours</option><option>16+ hours</option>
+            </select>
+          </div>
+          <div class="form-group full"><label>Why do you want to volunteer? (optional)</label>
+            <textarea name="motivation" placeholder="Tell us your motivation..."></textarea>
+          </div>
+        </div>
+        <button class="btn-submit" type="submit" id="vol-btn">Submit Registration 🙌</button>
+      </form>
+      <div class="form-success" id="vol-success">
+        <div class="success-icon">🎉</div>
+        <h4>Welcome to the Family!</h4>
+        <p>Your volunteer registration has been received and saved. We'll reach out soon with opportunities. Thank you for your generous heart!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WASTE DONOR FORM ── -->
+  <div class="form-panel" id="panel-donor">
+    <div class="form-wrapper reveal">
+      <h3>♻️ Waste Collection Form</h3>
+      <p class="form-subtitle">Fill in your details below. Our team will contact you to arrange a free door-to-door pickup.</p>
+      
+      <form id="donorForm" onsubmit="submitForm(event, 'donor')">
+        <div class="form-grid">
+          <div class="form-group"><label>First Name *</label><input type="text" name="firstName" placeholder="Priya" required /></div>
+          <div class="form-group"><label>Last Name *</label><input type="text" name="lastName" placeholder="Patel" required /></div>
+          <div class="form-group"><label>Phone Number *</label><input type="tel" name="phone" placeholder="+91 99887 65432" required /></div>
+          <div class="form-group"><label>Email Address</label><input type="email" name="email" placeholder="priya@email.com" /></div>
+          <div class="form-group full"><label>Pickup Address *</label><input type="text" name="address" placeholder="House No., Street, Area" required /></div>
+          <div class="form-group"><label>City *</label><input type="text" name="city" placeholder="Nagpur" required /></div>
+          <div class="form-group"><label>PIN Code *</label><input type="text" name="pincode" placeholder="440001" required /></div>
+          <div class="form-group full">
+            <label>Type of Waste to Donate *</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item"><input type="checkbox" name="wasteType" id="w1" value="Furniture"><label for="w1">🪑 Furniture</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="wasteType" id="w2" value="Electronics"><label for="w2">📺 Electronics</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="wasteType" id="w3" value="Clothing/Fabric"><label for="w3">👕 Clothing / Fabric</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="wasteType" id="w4" value="Plastic"><label for="w4">🧴 Plastic</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="wasteType" id="w5" value="Metal/Scrap"><label for="w5">🔩 Metal / Scrap</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="wasteType" id="w6" value="Paper/Cardboard"><label for="w6">📦 Paper / Cardboard</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="wasteType" id="w7" value="Glass"><label for="w7">🫙 Glass</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="wasteType" id="w8" value="Toys/Books"><label for="w8">🧸 Toys / Books</label></div>
+              <div class="checkbox-item"><input type="checkbox" name="wasteType" id="w9" value="Other"><label for="w9">📋 Other</label></div>
+            </div>
+          </div>
+          <div class="form-group full"><label>Description of Waste *</label>
+            <textarea name="description" placeholder="e.g. 2 old chairs, 1 broken fan, a bag of old clothes..." required></textarea>
+          </div>
+          <div class="form-group"><label>Preferred Pickup Date</label><input type="date" name="pickupDate" /></div>
+          <div class="form-group"><label>Preferred Time Slot</label>
+            <select name="timeSlot">
+              <option value="">Select</option>
+              <option>Morning (9am – 12pm)</option>
+              <option>Afternoon (12pm – 3pm)</option>
+              <option>Evening (3pm – 6pm)</option>
+              <option>Flexible</option>
+            </select>
+          </div>
+          <div class="form-group full"><label>Additional Notes (optional)</label>
+            <textarea name="notes" placeholder="Any special instructions for our pickup team..."></textarea>
+          </div>
+        </div>
+        <button class="btn-submit" type="submit" id="donor-btn">Schedule Pickup ♻️</button>
+      </form>
+      <div class="form-success" id="donor-success">
+        <div class="success-icon">✅</div>
+        <h4>Form Submitted!</h4>
+        <p>Thank you for donating your waste! Your details have been saved. Our team will contact you soon to arrange a free pickup. You are helping transform lives!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-info reveal">
+    <div class="section-tag">Reach Out</div>
+    <h2>Let's <em>Connect</em></h2>
+    <p style="font-family:'Tiro Devanagari Marathi',serif;font-size:.9rem;color:var(--earth);margin-top:-.8rem;margin-bottom:.5rem;">आपण जोडूया</p>
+    <p>For partnerships, financial donations, or general enquiries — we'd love to hear from you.</p>
+    <div class="contact-details">
+      <div class="contact-item"><div class="contact-item-icon">📍</div><div class="contact-item-text">नागपूर, महाराष्ट्र — Nagpur, Maharashtra</div></div>
+      <div class="contact-item"><div class="contact-item-icon">📧</div><div class="contact-item-text"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2f4c40415b4e4c5b6f4e424e5d5c584e4e5d40405f49405a414b4e5b46404101405d48">[email&#160;protected]</a></div></div>
+      <div class="contact-item"><div class="contact-item-icon">📞</div><div class="contact-item-text">+91 98765 43210</div></div>
+    </div>
+  </div>
+  <form class="contact-form reveal" onsubmit="handleContact(event)">
+    <div class="form-row">
+      <div class="form-group"><label>FIRST NAME</label><input type="text" placeholder="Rahul" required /></div>
+      <div class="form-group"><label>LAST NAME</label><input type="text" placeholder="Sharma" required /></div>
+    </div>
+    <div class="form-group"><label>EMAIL ADDRESS</label><input type="email" placeholder="rahul@example.com" required /></div>
+    <div class="form-group"><label>I WANT TO</label>
+      <select>
+        <option>Make a financial donation</option>
+        <option>Partner or collaborate</option>
+        <option>Media / Press enquiry</option>
+        <option>Just learn more</option>
+      </select>
+    </div>
+    <div class="form-group"><label>MESSAGE</label><textarea placeholder="Tell us more..."></textarea></div>
+    <button class="btn-submit" type="submit" id="contact-btn">Send Message ✉️</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="logo" style="color:#fff;">Amar<span>Swaroop</span><br>Foundation</div>
+    <p>Transforming waste into hope, and creating a circular economy of compassion across India.</p>
+    <p style="font-family:'Tiro Devanagari Marathi',serif; font-size:.85rem; color:rgba(255,255,255,0.35); margin-top:.5rem;">कचऱ्यातून जीवन, नागपूरच्या मातीतून प्रेम.</p>
+  </div>
+  <div class="footer-links">
+    <h4>Navigate</h4>
+    <ul>
+      <li><a href="our-story.html" >Our Story</a></li>
+    
+      <li><a href="our-mission.html" >Our Mission</a></li>
+      <li><a href="our-impact.html" >Impact</a></li>
+      <li><a href="get-involved.html" >Get Involved</a></li>
+      <li><a href="#forms-section">Forms</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <div class="footer-links">
+    <h4>Get Involved</h4>
+    <ul>
+      <li><a href="#forms-section">Donate Waste</a></li>
+      <li><a href="#forms-section">Volunteer</a></li>
+      <li><a href="#contact">Donate Funds</a></li>
+      <li><a href="#contact">Partner With Us</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">© 2025 Amar Swaroop Foundation · नागपूर, महाराष्ट्र &nbsp;|&nbsp; Made with 💚 for a better world.</div>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + tab).classList.add('active');
+    btn.classList.add('active');
+  }
+  // ── Master Google Sheet URL (one URL for all forms) ──
+  const MASTER_SHEET_URL = 'https://script.google.com/macros/s/AKfycbww9LiyxfR9EB1q2uSQGmdQJz8AUalgGKhoB5-wF71FocpFiM55dkPenWkKu7D0ZECU_w/exec'; // Replace with your Apps Script URL
+  function submitForm(e, type) {
+    e.preventDefault();
+    const form = e.target;
+    const btnId = type === 'volunteer' ? 'vol-btn' : 'donor-btn';
+    const successId = type === 'volunteer' ? 'vol-success' : 'donor-success';
+    const sheetUrl = MASTER_SHEET_URL;
+    const btn = document.getElementById(btnId);
+    const data = { formType: type, submittedAt: new Date().toLocaleString('en-IN') };
+    const checkboxFields = ['skills', 'availability', 'wasteType'];
+    checkboxFields.forEach(name => {
+      const vals = [...form.querySelectorAll(`input[name="${name}"]:checked`)].map(c => c.value);
+      data[name] = vals.join(', ') || 'None selected';
+    });
+    new FormData(form).forEach((value, key) => {
+      if (!checkboxFields.includes(key)) data[key] = value;
+    });
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+    if (sheetUrl.startsWith('http')) {
+      fetch(sheetUrl, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+      .then(() => showSuccess(form, successId)).catch(() => showSuccess(form, successId));
+    } else {
+      setTimeout(() => showSuccess(form, successId), 900);
+    }
+  }
+  function showSuccess(form, successId) {
+    form.style.display = 'none';
+    document.getElementById(successId).classList.add('show');
+    document.getElementById(successId).scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  function handleContact(e) {
+    e.preventDefault();
+    const btn = document.getElementById('contact-btn');
+    btn.textContent = '✅ Message Sent! Thank you.';
+    btn.style.background = '#52b788';
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>
